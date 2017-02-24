@@ -1,0 +1,22 @@
+extends layout
+
+block content
+	.container
+		section.title-row
+			h1 API MishMash
+			h3 A Collection of APIs Made With Node.js
+			if user
+				p Hello and welcome #{user.name}
+				a(href="user/logout") logout
+				
+		section.endpoint-row
+			h3 Endpoints:
+			ul.endpoint-ul
+				li.endpoint-li
+					a(href="/forms/recipepostform") recipepostform
+				li.endpoint-li
+					a(href="comment") comment
+				li.endpoint-li
+					a(href="userform") register user
+				li.endpoint-li
+					a(href="loginform") login user
