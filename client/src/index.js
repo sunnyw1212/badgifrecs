@@ -54,7 +54,7 @@ const createStoreWithMiddleWare = applyMiddleware(promise, thunk)(createStore);
 const store = createStoreWithMiddleWare(
   rootReducer, 
   {} //initial state
-  +  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  // +  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 //save currentUser state to localStorage, prevetns having to relogin on page refresh

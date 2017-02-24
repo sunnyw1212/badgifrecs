@@ -193,7 +193,7 @@ class PhotoGrid extends Component{
 			<div>
 				<List className='row'>
 					<div className="col-md-6">
-						<Subheader> BadRecipeGifs Originals</Subheader>
+						<Subheader> BadGifRecipes Originals</Subheader>
 						<Divider style={{marginBottom: 16}}></Divider>
 						<div style={{maxHeight: 100 + 'vh', overflow: 'auto'}}>
 							{this.renderOriginalPosts()}

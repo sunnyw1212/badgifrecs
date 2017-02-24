@@ -95,7 +95,7 @@ class Nav extends Component{
 		return(
 			<div>
 				<AppBar
-					title={<span className='nav__logo'>BadRecipeGifs</span>}
+					title={<span className='nav__logo'>BadGifRecipes</span>}
 					onTitleTouchTap={this.goToHome}
 					onLeftIconButtonTouchTap={this.handleToggle}
 					children={ this.props.currentUser.user ? <p>Logged in as {this.props.currentUser.user.name}</p> : null}
