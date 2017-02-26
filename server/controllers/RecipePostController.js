@@ -4,10 +4,23 @@
 	const gm = require('gm');
 	const imageMagick = gm.subClass({ imageMagick: true });
 	const validator = require('validator');
+	const axios = require('axios');
+	var cloudinary = require('cloudinary');
+	const CLOUDINARY_NAME = 'qwertwerty21';
+	const CLOUDINARY_API_KEY = '365155531524953';
+	const CLOUDINARY_API_SECRET = 'gAL0Hjh1nT9y06E68FZRLFh78Bw';
+	const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/qwertwerty21/upload';
+	const CLOUDINARY_UPLOAD_PRESET = 'tb0lfryt';
 
 	const sendJsonResponse = function(res, status, content){
 		res.status(status).json(content);
 	}
+
+	cloudinary.config({
+		cloud_name: CLOUDINARY_NAME,
+		api_key: CLOUDINARY_API_KEY,
+		api_secret: CLOUDINARY_API_SECRET
+	});
 
 
 	module.exports = {
@@ -61,6 +74,18 @@
 			
 			//copy recipe info body
 			let body = Object.assign({}, req.body);
+
+			//save thumbnail to folder
+			//upload to cloudinary
+			//get result from cloudinary 
+			//reassign body[recupe thumb] to coloudinaryurl
+			//delete thumbnail from folder
+			//save body to mongo
+
+			//TODO SAVE THUMBNAIL TO CLOUDINARY 
+			//ON SUCCESS SAVE SECURE CLOUDINARY URL TO body['recipe_thumb'] 
+			
+			
 			
 			function saveThumbnailToFolder( file, folderPath, callback ){
 
@@ -77,9 +102,9 @@
 				console.log('this is the filename', filename)
 				let thumbFilename = filename + '.jpg';
 				console.log( 'heres thumbfilename', thumbFilename)
-				//assign new thumbanil  filename to body recipe_thumb
-				body['recipe_thumb'] = thumbFilename;
-				console.log('hers body agai n with recipethumb included',body)
+				
+				
+				
 				//save thumbnail
 				imageMagick(file)
 					.selectFrame(0)
@@ -91,8 +116,27 @@
 							return;
 						}
 						console.log('thumbnail saved')
-						callback();
-					})
+						//upload to cloudinary
+						cloudinary.uploader.upload(thumbFilename, function(result){
+							console.log('heres cloudinary result', result)
+							//assign body[recipe_thumb] to cloudinary result secure url
+							body['recipe_thumb'] = result.secure_url;
+							console.log('hers body agai n with recipethumb included',body)
+
+							//delete tmp file jpg
+							fs.unlink(thumbFilename, function(err){
+								if(err){
+									console.log('err in unlink thumbFilename', err)
+									sendJsonResponse(res, 400, err)
+								}
+								console.log('deleted temp path')
+								callback();
+							});//end unlink
+
+						});//end clouidnary uplloader upload
+						
+						
+					})//end imageMacgick write
 	
 			}//end func saveThumbnailToFolder
 
@@ -105,6 +149,8 @@
 			promiseToSaveThumbnail.then(
 				function(){
 					console.log('prmise suceeded' )
+
+
 					//save body to db
 					Models.RecipePostModel.create(body, (err, result)=>{
 						if(err){

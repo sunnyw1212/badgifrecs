@@ -88,20 +88,20 @@ class PhotoGrid extends Component{
     else{
     	console.log('Loaded! curent state:',this.props)
 	    return this.props.originalAll.posts.map((post, index) => {
-	    	let img = post.recipe_thumb;
-	    	let imgpath;
-	    	console.log('IMG', img, 'post', post)
-	    	if(img){
-	    		imgpath = '/' + img.split('/').slice(2).join('/')
-	    	}
-	    	console.log('imgpath', imgpath)
+	    	// let img = post.recipe_thumb;
+	    	// let imgpath;
+	    	// console.log('IMG', img, 'post', post)
+	    	// if(img){
+	    	// 	imgpath = '/' + img.split('/').slice(2).join('/')
+	    	// }
+	    	// console.log('imgpath', imgpath)
 	      return (
 					<Link key={post._id} to={`/view/${post._id}`}>
 						<ListItem
 							innerDivStyle={{paddingLeft: 85}}
 							primaryText={post.recipe_title}
 							secondaryText={`Posted By ${post.user.name}`}
-							leftIcon={<img style={{position:'absolute', top:0, left:0, margin: 0, marginRight: 5, height: 70, width: 70}} src={imgpath}/>}
+							leftIcon={<img style={{position:'absolute', top:0, left:0, margin: 0, marginRight: 5, height: 70, width: 70}} src={post.recipe_thumb}/>}
 							
 						>
 							
