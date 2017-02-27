@@ -12,6 +12,9 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const mongoURL = 'mongodb://sunnybadgifrecipes:badgifrecipes@ds161029.mlab.com:61029/badgifrecipes';
 
+require('./config/cloudinary');
+
+
 //require routes
 const routes = require('./routes/');
 //const forms = require('./routes/forms');

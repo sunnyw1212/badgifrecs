@@ -29,7 +29,12 @@ class Nav extends Component{
 	renderDrawer(){
 		if(this.props.currentUser.user){
 			return(
-				<Drawer open={this.state.open}>
+				<Drawer
+					docked={false}
+          open={this.state.open}
+          onRequestChange={this.handleToggle}
+					
+				>
 					<MenuItem onClick={this.handleToggle} className='text-right'>
 						<IconButton>
 							<NavigationClose></NavigationClose>
@@ -58,7 +63,11 @@ class Nav extends Component{
 		else{
 			return(
 
-				<Drawer open={this.state.open}>
+				<Drawer
+					docked={false}
+          open={this.state.open}
+          onRequestChange={this.handleToggle}
+				>
 					<MenuItem onClick={this.handleToggle} className='text-right'>
 						<IconButton>
 							<NavigationClose></NavigationClose>

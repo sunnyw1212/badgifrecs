@@ -4,23 +4,11 @@
 	const gm = require('gm');
 	const imageMagick = gm.subClass({ imageMagick: true });
 	const validator = require('validator');
-	const axios = require('axios');
-	var cloudinary = require('cloudinary');
-	const CLOUDINARY_NAME = 'qwertwerty21';
-	const CLOUDINARY_API_KEY = '365155531524953';
-	const CLOUDINARY_API_SECRET = 'gAL0Hjh1nT9y06E68FZRLFh78Bw';
-	const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/qwertwerty21/upload';
-	const CLOUDINARY_UPLOAD_PRESET = 'tb0lfryt';
+	const cloudinary = require('cloudinary');
 
 	const sendJsonResponse = function(res, status, content){
 		res.status(status).json(content);
 	}
-
-	cloudinary.config({
-		cloud_name: CLOUDINARY_NAME,
-		api_key: CLOUDINARY_API_KEY,
-		api_secret: CLOUDINARY_API_SECRET
-	});
 
 
 	module.exports = {
