@@ -16,6 +16,8 @@ import { GridList, GridTile } from 'material-ui/GridList';
 import { List, ListItem } from 'material-ui/List'
 import IconButton from 'material-ui/IconButton';
 import FavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import FileUpload from 'material-ui/svg-icons/file/file-upload';
 
 
 class PhotoGrid extends Component{
@@ -206,6 +208,15 @@ class PhotoGrid extends Component{
 						<div style={{maxHeight: 100 + 'vh', overflow: 'auto'}}>
 							{this.renderRedditPosts()}
 						</div>
+						
+					</div>
+
+					<div className='hidden-xl hidden-lg hidden-md hidden-sm' style={{position: 'fixed', bottom: 10, right: 10}}>
+						<Link to='/upload'>
+							<FloatingActionButton mini={true}>
+								<FileUpload></FileUpload>
+							</FloatingActionButton>
+						</Link>
 						
 					</div>
 					

@@ -167,25 +167,53 @@ class View extends Component{
      />
 	];
 
+	renderDescription(){
+		let {recipe_description} = this.props.originalSingle.post
+		if(recipe_description.length < 1){
+			return(
+				<div style={{color: 'rgba(0, 0, 0, 0.541176)'}}>
+					No Description Available
+				</div>
+			)
+		}//end if
+		else{
+			return(
+				<div style={{color: 'rgba(0, 0, 0, 0.541176)'}}>
+					{recipe_description}
+				</div>
+			)
+		}
+	}
+
 	renderInstructions(){
 		//.slice() to clone array 
 		let instructions = this.props.originalSingle.post.recipe_instructions.slice();
-		return instructions.map((instruction, index, array)=>{
-			console.log('heres the instruciton', instruction)
+		if(instructions.length <= 1){
 			return(
-				
-				<div key={index}>
-					<ListItem
-						primaryText={instruction}
-					>	
-						
-					</ListItem>
-					<Divider></Divider>
-
+				<div style={{color: 'rgba(0, 0, 0, 0.541176)'}}>
+					No Instructions Available
 				</div>
 			)
-			
-		});//end map
+		}
+		else{
+			return instructions.map((instruction, index, array)=>{
+				console.log('heres the instruciton', instruction)
+				return(
+					
+					<div key={index}>
+						<ListItem
+							primaryText={instruction}
+						>	
+							
+						</ListItem>
+						<Divider></Divider>
+
+					</div>
+				)
+				
+			});//end map
+		}
+		
 	}//end func renderIngredients
 	renderNewComments(){
 
@@ -335,7 +363,7 @@ class View extends Component{
 		//if success
 		else{
 			console.log('THIS ISS THE ROINGAL SINGEL JK HERES PROPS', this.props)
-			let { recipe_gif, recipe_title, recipe_description } = this.props.originalSingle.post;
+			let { recipe_gif, recipe_title } = this.props.originalSingle.post;
 			let { name } = this.props.originalSingle.post.user;
 
 			console.log('this the new props in View', this.props)
@@ -370,9 +398,7 @@ class View extends Component{
 			    	<CardText
 							expandable={true}
 			    	>
-			    		<div style={{color: 'rgba(0, 0, 0, 0.541176)'}}>
-				     		{`${recipe_description}`}
-				     	</div>
+			    		{this.renderDescription()}
 			    	</CardText>
 			    </Card>
 

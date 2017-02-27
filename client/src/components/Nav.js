@@ -3,12 +3,23 @@ import {connect} from 'react-redux';
 
 import {Link, browserHistory} from 'react-router';
 
+import { cyan500, cyan700, pinkA100, grey100, grey300, grey400, grey500, white, darkBlack, fullBlack,} from 'material-ui/styles/colors';
+
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 
+
+
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
+import ActionHome from 'material-ui/svg-icons/action/home';
+import FileUpload from 'material-ui/svg-icons/file/file-upload';
+import SocialPersonAdd from 'material-ui/svg-icons/social/person-add';
+import ActionAccountBox from 'material-ui/svg-icons/action/account-box';
+import SocialPersonOutline from 'material-ui/svg-icons/social/person-outline';
 
 
 class Nav extends Component{
@@ -42,7 +53,7 @@ class Nav extends Component{
 					</MenuItem>
 					<Link to='/' onClick={this.handleToggle}>
 						<MenuItem>
-							Explore
+							Home
 						</MenuItem>
 					</Link>
 					<Link to='/upload' onClick={this.handleToggle}>
@@ -75,7 +86,7 @@ class Nav extends Component{
 					</MenuItem>
 					<Link to='/' onClick={this.handleToggle}>
 						<MenuItem>
-							Explore
+							Home
 						</MenuItem>
 					</Link>
 					<Link to='/upload' onClick={this.handleToggle}>
@@ -100,6 +111,70 @@ class Nav extends Component{
 		}//end else
 	}//end func renderDrawer
 
+	renderToolbar(){
+		if(this.props.currentUser.user){
+			return(
+				<Toolbar className='hidden-sm hidden-md hidden-lg hidden-xl' style={{display: 'block', backgroundColor: pinkA100 }}>
+					<ToolbarGroup style={{alignContent: 'space-between'}}>
+						<Link to='/' style={{position: 'relative'}}>
+							<IconButton iconStyle={{color: white}} touch={true}>
+								<ActionHome></ActionHome>
+							</IconButton>
+							<span style={{position:'absolute', bottom:0, left:8, fontSize:12, color: white}}>Home</span>
+						</Link>
+						<Link to='/upload' style={{position: 'relative'}}>
+							<IconButton iconStyle={{color: white}} touch={true}>
+								<FileUpload></FileUpload>
+							</IconButton>
+							<span style={{position:'absolute', bottom:0, left:5, fontSize:12, color: white}}>Upload</span>
+						</Link>
+						<Link to='/logout' style={{position: 'relative'}}>
+							<IconButton iconStyle={{color: white}} touch={true}>
+								<SocialPersonOutline></SocialPersonOutline>
+							</IconButton>
+							<span style={{position:'absolute', bottom:0, left:5, fontSize:12, color: white}}>Logout</span>
+						</Link>
+						
+						
+					</ToolbarGroup>
+				</Toolbar>
+			)
+		}
+		else{
+			return(
+				<Toolbar className='hidden-sm hidden-md hidden-lg hidden-xl' style={{display: 'block' , backgroundColor: pinkA100 }}>
+					<ToolbarGroup style={{alignContent: 'space-between'}}>
+						<Link to='/' style={{position: 'relative'}}>
+							<IconButton iconStyle={{color: white}} touch={true}>
+								<ActionHome></ActionHome>
+							</IconButton>
+							<span style={{position:'absolute', bottom:0, left:8, fontSize:12, color: white}}>Home</span>
+						</Link>
+						<Link to='/upload' style={{position: 'relative'}}>
+							<IconButton iconStyle={{color: white}} touch={true}>
+								<FileUpload></FileUpload>
+							</IconButton>
+							<span style={{position:'absolute', bottom:0, left:5, fontSize:12, color: white}}>Upload</span>
+						</Link>
+						<Link to='/register' style={{position: 'relative'}}>
+							<IconButton iconStyle={{color: white}} touch={true}>
+								<SocialPersonAdd></SocialPersonAdd>
+							</IconButton>
+							<span style={{position:'absolute', bottom:0, left:5, fontSize:12, color: white}}>Register</span>
+						</Link>
+						<Link to='/login' style={{position: 'relative'}}>
+							<IconButton iconStyle={{color: white}} touch={true}>
+								<ActionAccountBox></ActionAccountBox>
+							</IconButton>
+							<span style={{position:'absolute', bottom:0, left:5, fontSize:12, color: white}}>Login</span>
+						</Link>
+						
+					</ToolbarGroup>
+				</Toolbar>
+			)
+		}
+	}
+
 	render(){
 		return(
 			<div>
@@ -109,6 +184,8 @@ class Nav extends Component{
 					onLeftIconButtonTouchTap={this.handleToggle}
 					children={ this.props.currentUser.user ? <p>Logged in as {this.props.currentUser.user.name}</p> : null}
 				/>
+				{this.renderToolbar()}
+
 				
 				{this.renderDrawer()}
 
