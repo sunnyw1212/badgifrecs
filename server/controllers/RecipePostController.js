@@ -107,6 +107,11 @@
 						//upload to cloudinary
 						cloudinary.uploader.upload(thumbFilename, function(result){
 							console.log('heres cloudinary result', result)
+							if(result.error){
+								console.log('err in unlink thumbFilename', result.error)
+								sendJsonResponse(res, 400, result.error)
+								return
+							}
 							//assign body[recipe_thumb] to cloudinary result secure url
 							body['recipe_thumb'] = result.secure_url;
 							console.log('hers body agai n with recipethumb included',body)
@@ -116,6 +121,7 @@
 								if(err){
 									console.log('err in unlink thumbFilename', err)
 									sendJsonResponse(res, 400, err)
+									return
 								}
 								console.log('deleted temp path')
 								callback();

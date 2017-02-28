@@ -5,6 +5,8 @@ import {browserHistory} from 'react-router';
 
 import {getRedditPost, getRedditPosts} from '../actions/';
 
+import { cyan500, cyan700, pinkA100, grey100, grey300, grey400, grey500, white, darkBlack, fullBlack,} from 'material-ui/styles/colors';
+
 import LinearProgress from 'material-ui/LinearProgress';
 
 import Dialog from 'material-ui/Dialog';
@@ -17,6 +19,8 @@ import IconButton from 'material-ui/IconButton';
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Subheader from 'material-ui/Subheader';
+
+import {StickyContainer, Sticky} from 'react-sticky';
 
 class ViewReddit extends Component{
 
@@ -166,51 +170,66 @@ class ViewReddit extends Component{
 
 			console.log('this the new props in viewReddit', this.props)
 			return(
-				
-				<Card style={{maxWidth:600}}>
-					<Card >
-						<CardMedia>
-				      <img src={ url } className='img-responsive'/>
-				    </CardMedia>
-					</Card>
-					
-					<Card>
-						<CardHeader 
-				    	title={title}
-				    	subtitle={`Posted By u/${author}`}
-							children={this.renderNextRecipeBtn()}
-				    >
-				    
-				    </CardHeader>
-				   
-					</Card>
-					
-			    
+				<div className='row'>
+					<div className='col-sm-8 col-sm-offset-2' style={{paddingLeft: 0, paddingRight: 0}}>
+						<StickyContainer>
+							<Card>
+								
+								<Sticky>
+									<Card >
+										<CardMedia mediaStyle={{backgroundColor: pinkA100, height: 50+'vh', width: 100 + '%'}}>
+								      <img src={ url } style={{height: 100 + '%'}}/>
+								    </CardMedia>
+									</Card>
+								</Sticky>
+								
+								
+								
+								<div style={{maxHeight: 50 + 'vh', overflow: 'auto'}}>
+									<Card>
+										<CardHeader 
+								    	title={title}
+								    	subtitle={`Posted By u/${author}`}
+											children={this.renderNextRecipeBtn()}
+								    >
+								    
+								    </CardHeader>
+								   
+									</Card>
+									
+							    
 
-					<Card >
-						<CardTitle
-							title='Comments'
-							showExpandableButton={true}
-							actAsExpander={true}
-							
-							
-						>
-							
-							
-						</CardTitle>
+									<Card >
+										<CardTitle
+											title='Comments'
+											showExpandableButton={true}
+											actAsExpander={true}
+											
+											
+										>
+											
+											
+										</CardTitle>
+										
+										<CardText
+										expandable={true}
+										>
+											<List>
+												{this.renderRedditPostComments()}
+											</List>
+											
+										</CardText>
+									
+									</Card>
+								</div>
+								
 						
-						<CardText
-						expandable={true}
-						>
-							<List>
-								{this.renderRedditPostComments()}
-							</List>
-							
-						</CardText>
+							</Card>
+						</StickyContainer>
+					</div>
 					
-					</Card>
-			
-				</Card>
+				</div>
+				
 
 
 			)//end return 

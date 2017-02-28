@@ -5,6 +5,8 @@ import {browserHistory} from 'react-router';
 
 import { getRecipePosts, createComment, resetNewComments } from '../actions/';
 
+import { cyan500, cyan700, pinkA100, grey100, grey300, grey400, grey500, white, darkBlack, fullBlack,} from 'material-ui/styles/colors';
+
 import LinearProgress from 'material-ui/LinearProgress';
 
 import Dialog from 'material-ui/Dialog';
@@ -19,6 +21,8 @@ import Subheader from 'material-ui/Subheader';
 
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
+
+import {StickyContainer, Sticky} from 'react-sticky';
 
 class View extends Component{
 	constructor(props){
@@ -368,100 +372,113 @@ class View extends Component{
 
 			console.log('this the new props in View', this.props)
 			return(
-				
-				<Card style={{maxWidth:600}}>
-					<Card >
-						<CardMedia>
-				      <img src={ recipe_gif } className='img-responsive'/>
-				    </CardMedia>
-					</Card>
-					
-					<Card>
-						<CardHeader 
-				    	title={recipe_title}
-				    	subtitle={`Posted By ${name}`}
-				    	children={this.renderNextRecipeBtn()}
-				    >
-				    	
-				    </CardHeader>
-				  
-					</Card>
+				<div className='row'>
+					<div className='col-sm-8 col-sm-offset-2' style={{paddingLeft: 0, paddingRight: 0}}>
+						<StickyContainer>
+							<Card>
 
-					<Card>
-			    	<CardTitle
-							title='Description'
-							showExpandableButton={true}
-							actAsExpander={true}
-			    	>
-			    		
-			    	</CardTitle>
-			    	<CardText
-							expandable={true}
-			    	>
-			    		{this.renderDescription()}
-			    	</CardText>
-			    </Card>
-
-			    <Card>
-			    	<CardTitle
-							title='Instructions'
-							showExpandableButton={true}
-							actAsExpander={true}
-			    	>
-			    		
-			    	</CardTitle>
-			    	<CardText
-							expandable={true}
-			    	>
-			    		<List>
-			    			{this.renderInstructions()}
-			    		</List>
-			    	</CardText>
-			    </Card>
-
-					<Card> 
-						<CardTitle
-							title='Comments'
-							showExpandableButton={true}
-							actAsExpander={true}
-							
-							
-						>
-							
-							
-						</CardTitle>
-						
-						<CardText
-						expandable={true}
-						>
-							<List>
-								{this.renderNewComments()}
-								{this.renderComments()}
-							</List>
-
-							
-							<Paper>
-								<form onSubmit={this.handleSubmit} style={{padding: 15}}>
-									<TextField
-										errorText={this.state.err_text_body}
-										fullWidth={true}
-										floatingLabelText='Comment'
-										value={this.state.text_body}
-										onChange={this.handleTextChange.bind(this, 'text_body')}
-									>
-									</TextField>
-									<RaisedButton style={{width: 100+'%'}} primary={true} label='Submit' type='submit'>
-									</RaisedButton>
-								</form>
+								<Sticky>
+									<Card >
+										<CardMedia mediaStyle={{backgroundColor: pinkA100, height: 50+'vh', width: 100 + '%'}}>
+								      <img src={ recipe_gif } style={{height: 100 + '%'}}/>
+								    </CardMedia>
+									</Card>
+								</Sticky>
 								
-							</Paper>
-							
-							
-						</CardText>
+								<div style={{maxHeight: 50 + 'vh', overflow: 'auto'}}>
+									<Card>
+										<CardHeader 
+								    	title={recipe_title}
+								    	subtitle={`Posted By ${name}`}
+								    	children={this.renderNextRecipeBtn()}
+								    >
+								    	
+								    </CardHeader>
+								  
+									</Card>
+
+									<Card>
+							    	<CardTitle
+											title='Description'
+											showExpandableButton={true}
+											actAsExpander={true}
+							    	>
+							    		
+							    	</CardTitle>
+							    	<CardText
+											expandable={true}
+							    	>
+							    		{this.renderDescription()}
+							    	</CardText>
+							    </Card>
+
+							    <Card>
+							    	<CardTitle
+											title='Instructions'
+											showExpandableButton={true}
+											actAsExpander={true}
+							    	>
+							    		
+							    	</CardTitle>
+							    	<CardText
+											expandable={true}
+							    	>
+							    		<List>
+							    			{this.renderInstructions()}
+							    		</List>
+							    	</CardText>
+							    </Card>
+
+									<Card> 
+										<CardTitle
+											title='Comments'
+											showExpandableButton={true}
+											actAsExpander={true}
+											
+											
+										>
+											
+											
+										</CardTitle>
+										
+										<CardText
+										expandable={true}
+										>
+											<List>
+												{this.renderNewComments()}
+												{this.renderComments()}
+											</List>
+
+											
+											<Paper>
+												<form onSubmit={this.handleSubmit} style={{padding: 15}}>
+													<TextField
+														errorText={this.state.err_text_body}
+														fullWidth={true}
+														floatingLabelText='Comment'
+														value={this.state.text_body}
+														onChange={this.handleTextChange.bind(this, 'text_body')}
+													>
+													</TextField>
+													<RaisedButton style={{width: 100+'%'}} primary={true} label='Submit' type='submit'>
+													</RaisedButton>
+												</form>
+												
+											</Paper>
+											
+											
+										</CardText>
+										
+									</Card>
+								</div>
+								
 						
-					</Card>
-			
-				</Card>
+							</Card>
+						</StickyContainer>
+						
+					</div>
+				</div>
+				
 
 
 			)//end return 

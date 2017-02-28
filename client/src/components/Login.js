@@ -6,7 +6,7 @@ import {loginUser} from '../actions/';
 
 import LinearProgress from 'material-ui/LinearProgress';
 import Dialog from 'material-ui/Dialog';
-import { Card, CardText } from 'material-ui/Card';
+import { Card, CardHeader, CardText } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -124,29 +124,39 @@ class Login extends Component{
 			return(
 
 				<form onSubmit={this.handleSubmit}>
-					<Card>
-						<h2>Login</h2>
-						<CardText>
-							<TextField
-								errorText={this.state.err_name} 
-								floatingLabelText='Username'
-								value={this.state.name}
-								onChange={this.handleTextChange.bind(this, 'name')}
-							>
-							</TextField>
-							<br/>
-							<TextField
-								errorText={this.state.err_password}
-								floatingLabelText='Password'
-								value={this.state.password}
-								type='password'
-								onChange={this.handleTextChange.bind(this, 'password')}
-							>
-							</TextField>
+					<div className='row'>
+						<div className='col-sm-8 col-sm-offset-2' style={{paddingLeft: 0, paddingRight: 0}}>
+							<Card>
+								<CardHeader
+									title='Login'
+								>
+								</CardHeader>
+								<CardText>
+									<TextField
+										errorText={this.state.err_name} 
+										floatingLabelText='Username'
+										value={this.state.name}
+										onChange={this.handleTextChange.bind(this, 'name')}
+										fullWidth={true}
+									>
+									</TextField>
+									<br/>
+									<TextField
+										errorText={this.state.err_password}
+										floatingLabelText='Password'
+										value={this.state.password}
+										type='password'
+										onChange={this.handleTextChange.bind(this, 'password')}
+										fullWidth={true}
+									>
+									</TextField>
 
-						</CardText>
-						<RaisedButton primary={true} label='Login' type='submit'></RaisedButton>
-					</Card>
+								</CardText>
+								<RaisedButton primary={true} label='Login' type='submit' style={{width: 100+ '%'}}></RaisedButton>
+							</Card>
+						</div>
+					</div>
+					
 				</form>			
 			)
 		

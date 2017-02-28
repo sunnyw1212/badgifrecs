@@ -8,6 +8,8 @@ import { createRecipePost } from '../actions/';
 
 import validator from 'validator';
 
+import { cyan500, cyan700, pinkA100, grey100, grey300, grey400, grey500, white, darkBlack, fullBlack,} from 'material-ui/styles/colors';
+
 import LinearProgress from 'material-ui/LinearProgress';
 import Dialog from 'material-ui/Dialog';
 
@@ -159,19 +161,22 @@ class UploadRecipe extends Component{
 			return(
 
 				<form onSubmit={this.handleSubmit} encType='multipart/form-data'>
-					<h2>Upload New Recipe</h2>
+					
 					<div className='row'>
 						
-						<div className='col-md-6 col-md-offset-3'>
+						<div className='col-sm-8 col-sm-offset-2' style={{paddingLeft: 0, paddingRight: 0}}>
 							<Card>
-
+								
 								<Card>
 									<CardHeader
 										title={this.state.recipe_gif}
 									>
 									</CardHeader>
-									<CardMedia>
-										<img src={this.state.recipe_gif} alt='Recipe Gif'/>
+									<CardMedia mediaStyle={{backgroundColor: pinkA100, height: 50+'vh', width: 100 + '%'}}>
+										
+											<img src={this.state.recipe_gif} alt='Recipe Gif' style={{height: 100 + '%'}}/>
+										
+										
 									</CardMedia>
 								</Card>
 
@@ -215,7 +220,7 @@ class UploadRecipe extends Component{
 
 								</CardText>
 
-								<RaisedButton primary={true} label='Upload Recipe' type='submit'></RaisedButton>
+								<RaisedButton primary={true} label='Upload Recipe' type='submit' style={{width: 100+ '%'}}></RaisedButton>
 							</Card>
 
 						</div>

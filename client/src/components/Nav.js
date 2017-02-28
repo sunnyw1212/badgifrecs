@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import {Link, browserHistory} from 'react-router';
 
-import { cyan500, cyan700, pinkA100, grey100, grey300, grey400, grey500, white, darkBlack, fullBlack,} from 'material-ui/styles/colors';
+import { cyan500, cyan700, pinkA200, grey100, grey300, grey400, grey500, white, darkBlack, fullBlack,} from 'material-ui/styles/colors';
 
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
@@ -20,6 +20,8 @@ import FileUpload from 'material-ui/svg-icons/file/file-upload';
 import SocialPersonAdd from 'material-ui/svg-icons/social/person-add';
 import ActionAccountBox from 'material-ui/svg-icons/action/account-box';
 import SocialPersonOutline from 'material-ui/svg-icons/social/person-outline';
+
+import Headroom from 'react-headroom';
 
 
 class Nav extends Component{
@@ -114,7 +116,7 @@ class Nav extends Component{
 	renderToolbar(){
 		if(this.props.currentUser.user){
 			return(
-				<Toolbar className='hidden-sm hidden-md hidden-lg hidden-xl' style={{display: 'block', backgroundColor: pinkA100 }}>
+				<Toolbar className='hidden-sm hidden-md hidden-lg hidden-xl' style={{display: 'block', backgroundColor: pinkA200, boxShadow: 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px' }}>
 					<ToolbarGroup style={{alignContent: 'space-between'}}>
 						<Link to='/' style={{position: 'relative'}}>
 							<IconButton iconStyle={{color: white}} touch={true}>
@@ -142,7 +144,7 @@ class Nav extends Component{
 		}
 		else{
 			return(
-				<Toolbar className='hidden-sm hidden-md hidden-lg hidden-xl' style={{display: 'block' , backgroundColor: pinkA100 }}>
+				<Toolbar className='hidden-sm hidden-md hidden-lg hidden-xl' style={{display: 'block' , backgroundColor: pinkA200, boxShadow: 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px' }}>
 					<ToolbarGroup style={{alignContent: 'space-between'}}>
 						<Link to='/' style={{position: 'relative'}}>
 							<IconButton iconStyle={{color: white}} touch={true}>
@@ -178,20 +180,20 @@ class Nav extends Component{
 	render(){
 		return(
 			<div>
+				
 				<AppBar
 					title={<span className='nav__logo'>BadGifRecipes</span>}
 					onTitleTouchTap={this.goToHome}
 					onLeftIconButtonTouchTap={this.handleToggle}
 					children={ this.props.currentUser.user ? <p>Logged in as {this.props.currentUser.user.name}</p> : null}
+					style={{boxShadow: 0}}
 				/>
-				{this.renderToolbar()}
+				<Headroom>
+					{this.renderToolbar()}
+				</Headroom>
 
-				
 				{this.renderDrawer()}
-
-
 			</div>
-
 			
 			
 
