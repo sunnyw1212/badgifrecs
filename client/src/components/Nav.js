@@ -52,18 +52,18 @@ class Nav extends Component{
 						</IconButton>
 					</MenuItem>
 					<Link to='/' onClick={this.handleToggle}>
-						<MenuItem>
-							Home
+						<MenuItem primaryText='Home' leftIcon={<ActionHome/>}>
+							
 						</MenuItem>
 					</Link>
 					<Link to='/upload' onClick={this.handleToggle}>
-						<MenuItem>
-							Upload
+						<MenuItem primaryText='Upload' leftIcon={<FileUpload/>}>
+							
 						</MenuItem>
 					</Link>
 					<Link to='/logout' onClick={this.handleToggle}>
-						<MenuItem>
-							Logout
+						<MenuItem primaryText='Logout' leftIcon={<SocialPersonOutline/>}>
+							
 						</MenuItem>
 					</Link>
 
@@ -85,23 +85,23 @@ class Nav extends Component{
 						</IconButton>
 					</MenuItem>
 					<Link to='/' onClick={this.handleToggle}>
-						<MenuItem>
-							Home
+						<MenuItem primaryText='Home' leftIcon={<ActionHome/>}>
+							
 						</MenuItem>
 					</Link>
 					<Link to='/upload' onClick={this.handleToggle}>
-						<MenuItem>
-							Upload
+						<MenuItem primaryText='Upload' leftIcon={<FileUpload/>}>
+						
 						</MenuItem>
 					</Link>
 					<Link to='/register' onClick={this.handleToggle}>
-						<MenuItem>
-							Register
+						<MenuItem primaryText='Register' leftIcon={<SocialPersonAdd/>}>
+							
 						</MenuItem>
 					</Link>
 					<Link to='/login' onClick={this.handleToggle}>
-						<MenuItem>
-							Login
+						<MenuItem primaryText='Login' leftIcon={<ActionAccountBox/>}>
+							
 						</MenuItem>
 					</Link>
 
