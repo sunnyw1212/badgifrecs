@@ -1,0 +1,36 @@
+$pinkA200: rgb(255, 64, 129);
+$white: #fff;
+
+
+.toolbar__container{
+	background-color: $pinkA200 !important;
+	box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px !important;
+}
+
+@media(max-width: 767px) {
+	.toolbar__container{
+		display: block !important;
+	}
+}
+
+.toolbar__toolbargroup{
+	align-content: space-between;
+}
+
+.toolbar__link{
+	position: relative;
+}
+
+.toolbar__label{
+	position: absolute;
+	bottom: 0px;
+	left: 8px;
+	font-size: 12px;
+	color: $white;
+}
+
+.appbar__loggedinp{
+	align-self:center;
+	color: $white;
+	font-size: 18px;
+}

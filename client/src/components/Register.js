@@ -10,6 +10,8 @@ import { Card, CardHeader, CardText } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
+import '../styles/RegisterLogin.scss';
+
 
 class Register extends Component{
 
@@ -77,10 +79,12 @@ class Register extends Component{
 			const newState = Object.assign({}, this.state);
 
 			for(let keys in emptyFields){
+				if(emptyFields.hasOwnProperty(keys)){
+					//TO DO ADD ERROR TEXT
+					var errField = `err_${keys}` 
+					newState[errField] = 'This is a required field.'
+				}
 				
-				//TO DO ADD ERROR TEXT
-				var errField = `err_${keys}` 
-				newState[errField] = 'This is a required field.'
 				
 			}
 			this.setState(newState);
@@ -125,7 +129,7 @@ class Register extends Component{
 
 				<form onSubmit={this.handleSubmit}>
 					<div className='row'>
-						<div className='col-sm-8 col-sm-offset-2' style={{paddingLeft: 0, paddingRight: 0}}>
+						<div className='col-sm-6 col-sm-offset-3 --padlr0' >
 							<Card>
 								<CardHeader
 									title='Register'
@@ -152,7 +156,7 @@ class Register extends Component{
 									</TextField>
 
 								</CardText>
-								<RaisedButton primary={true} label='Register' type='submit' style={{width: 100+ '%'}}></RaisedButton>
+								<RaisedButton primary={true} label='Register' type='submit' className='--width100'></RaisedButton>
 							</Card>
 						</div>
 					</div>

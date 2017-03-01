@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
@@ -10,10 +10,6 @@ import {browserHistory} from 'react-router';
 
 
 class Logout extends Component {
-  
-  constructor(props) {
-    super(props);
-  }
 
 	componentWillMount(){
 		this.props.actions.logout();

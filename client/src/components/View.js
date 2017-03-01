@@ -5,24 +5,22 @@ import {browserHistory} from 'react-router';
 
 import { getRecipePosts, createComment, resetNewComments } from '../actions/';
 
-import { cyan500, cyan700, pinkA100, grey100, grey300, grey400, grey500, white, darkBlack, fullBlack,} from 'material-ui/styles/colors';
-
 import LinearProgress from 'material-ui/LinearProgress';
 
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
-import IconButton from 'material-ui/IconButton';
+import { Card, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import Subheader from 'material-ui/Subheader';
 
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 
 import {StickyContainer, Sticky} from 'react-sticky';
+
+import '../styles/ViewReddit.scss';
 
 class View extends Component{
 	constructor(props){
@@ -130,10 +128,12 @@ class View extends Component{
 			let newState = Object.assign({}, this.state);
 
 			for(let keys in emptyFields){
+				if( emptyFields.hasOwnProperty(keys) ){
+					//TO DO ADD ERROR TEXT
+					var errField = `err_${keys}` 
+					newState[errField] = 'This is a required field.'
+				}
 				
-				//TO DO ADD ERROR TEXT
-				var errField = `err_${keys}` 
-				newState[errField] = 'This is a required field.'
 				
 			}
 			this.setState(newState);
@@ -175,14 +175,14 @@ class View extends Component{
 		let {recipe_description} = this.props.originalSingle.post
 		if(recipe_description.length < 1){
 			return(
-				<div style={{color: 'rgba(0, 0, 0, 0.541176)'}}>
+				<div className='--unavailable'>
 					No Description Available
 				</div>
 			)
 		}//end if
 		else{
 			return(
-				<div style={{color: 'rgba(0, 0, 0, 0.541176)'}}>
+				<div className='--unavailable'>
 					{recipe_description}
 				</div>
 			)
@@ -194,7 +194,7 @@ class View extends Component{
 		let instructions = this.props.originalSingle.post.recipe_instructions.slice();
 		if(instructions.length <= 1){
 			return(
-				<div style={{color: 'rgba(0, 0, 0, 0.541176)'}}>
+				<div className='--unavailable'>
 					No Instructions Available
 				</div>
 			)
@@ -324,7 +324,7 @@ class View extends Component{
 			return(
 				<RaisedButton
 					label='Next Recipe'
-					style={{position: 'absolute', right: 5, top: 10}}
+					className='__nextrecipebtn'
 					primary={true}
 					onClick={this.handleNextRecipe}
 		    >	
@@ -373,19 +373,19 @@ class View extends Component{
 			console.log('this the new props in View', this.props)
 			return(
 				<div className='row'>
-					<div className='col-sm-8 col-sm-offset-2' style={{paddingLeft: 0, paddingRight: 0}}>
+					<div className='col-sm-6 col-sm-offset-3 --padlr0'>
 						<StickyContainer>
 							<Card>
 
 								<Sticky>
 									<Card >
-										<CardMedia mediaStyle={{backgroundColor: pinkA100, height: 50+'vh', width: 100 + '%'}}>
-								      <img src={ recipe_gif } style={{height: 100 + '%'}}/>
+										<CardMedia className='cardmedia__imgcontainer'>
+								      <img src={ recipe_gif } className='--height100' alt={recipe_title}/>
 								    </CardMedia>
 									</Card>
 								</Sticky>
 								
-								<div style={{maxHeight: 50 + 'vh', overflow: 'auto'}}>
+								<div className='viewtext__container'>
 									<Card>
 										<CardHeader 
 								    	title={recipe_title}
@@ -451,7 +451,7 @@ class View extends Component{
 
 											
 											<Paper>
-												<form onSubmit={this.handleSubmit} style={{padding: 15}}>
+												<form onSubmit={this.handleSubmit} className='--pad15'>
 													<TextField
 														errorText={this.state.err_text_body}
 														fullWidth={true}
@@ -460,7 +460,7 @@ class View extends Component{
 														onChange={this.handleTextChange.bind(this, 'text_body')}
 													>
 													</TextField>
-													<RaisedButton style={{width: 100+'%'}} primary={true} label='Submit' type='submit'>
+													<RaisedButton className='--width100' primary={true} label='Submit' type='submit'>
 													</RaisedButton>
 												</form>
 												

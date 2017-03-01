@@ -5,22 +5,19 @@ import {browserHistory} from 'react-router';
 
 import {getRedditPost, getRedditPosts} from '../actions/';
 
-import { cyan500, cyan700, pinkA100, grey100, grey300, grey400, grey500, white, darkBlack, fullBlack,} from 'material-ui/styles/colors';
-
 import LinearProgress from 'material-ui/LinearProgress';
 
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
 
-import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
-import IconButton from 'material-ui/IconButton';
+import { Card, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import Subheader from 'material-ui/Subheader';
 
 import {StickyContainer, Sticky} from 'react-sticky';
+
+import '../styles/ViewReddit.scss';
 
 class ViewReddit extends Component{
 
@@ -31,6 +28,7 @@ class ViewReddit extends Component{
 			open: false
 		};
 		this.handleNextRecipe = this.handleNextRecipe.bind(this);
+		
 	}
 
 	componentWillMount(){
@@ -58,6 +56,7 @@ class ViewReddit extends Component{
 			if(post.data.preview && post.data.preview.images[0] && post.data.preview.images[0].variants && post.data.preview.images[0].variants.gif && post.data.preview.images[0].variants.gif.source){
 				return post
 			}
+			return null;
 		});
 		//get current post's index in gifs array
 		var currentGifIndex = gifs.map((gif)=>{
@@ -91,6 +90,8 @@ class ViewReddit extends Component{
      />
 	];
 
+	
+
 	renderRedditPostComments(){
 		let comments = this.props.redditSingle.post[1].data.children;
 		return comments.map((comment, index, array)=>{
@@ -121,7 +122,7 @@ class ViewReddit extends Component{
 			return(
 				<RaisedButton
 					label='Next Recipe'
-					style={{position: 'absolute', right: 5, top: 10}}
+					className='__nextrecipebtn'
 					primary={true}
 					onClick={this.handleNextRecipe}
 		    >	
@@ -171,21 +172,21 @@ class ViewReddit extends Component{
 			console.log('this the new props in viewReddit', this.props)
 			return(
 				<div className='row'>
-					<div className='col-sm-8 col-sm-offset-2' style={{paddingLeft: 0, paddingRight: 0}}>
+					<div className='col-sm-6 col-sm-offset-3 --padlr0'>
 						<StickyContainer>
 							<Card>
 								
 								<Sticky>
 									<Card >
-										<CardMedia mediaStyle={{backgroundColor: pinkA100, height: 50+'vh', width: 100 + '%'}}>
-								      <img src={ url } style={{height: 100 + '%'}}/>
+										<CardMedia className='cardmedia__imgcontainer'>
+								      <img src={ url } className='--height100' alt={title}/>
 								    </CardMedia>
 									</Card>
 								</Sticky>
 								
 								
 								
-								<div style={{maxHeight: 50 + 'vh', overflow: 'auto'}}>
+								<div className='viewtext__container'>
 									<Card>
 										<CardHeader 
 								    	title={title}
@@ -199,7 +200,7 @@ class ViewReddit extends Component{
 									
 							    
 
-									<Card >
+									<Card>
 										<CardTitle
 											title='Comments'
 											showExpandableButton={true}
@@ -212,7 +213,7 @@ class ViewReddit extends Component{
 										</CardTitle>
 										
 										<CardText
-										expandable={true}
+											expandable={true}
 										>
 											<List>
 												{this.renderRedditPostComments()}

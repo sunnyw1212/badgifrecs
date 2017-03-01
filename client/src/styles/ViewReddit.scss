@@ -1,0 +1,46 @@
+$grey: rgba(0, 0, 0, 0.541176);
+$pinkA100: rgb(255, 128, 171);
+
+.--unavailable{
+	color: $grey;
+}
+
+.--padlr0{
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+}
+
+.--width100{
+	width: 100%;
+}
+
+.--height100{
+	height: 100% !important;
+}
+
+.--pad15{
+	padding: 15px !important;
+}
+
+.__nextrecipebtn{
+	position: absolute;
+	right: 5px;
+	top: 10px;
+}
+
+.cardmedia__imgcontainer > div{
+	height: 50vh !important;
+	width: 100% !important;
+	background-color: $pinkA100;
+}
+
+@media(max-width: 1439px){
+	.cardmedia__imgcontainer > div{
+			height: 40vh !important;
+		}
+}
+
+.viewtext__container{
+	max-height: 50vh;
+	overflow: auto;
+}

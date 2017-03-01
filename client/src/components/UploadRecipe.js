@@ -8,18 +8,14 @@ import { createRecipePost } from '../actions/';
 
 import validator from 'validator';
 
-import { cyan500, cyan700, pinkA100, grey100, grey300, grey400, grey500, white, darkBlack, fullBlack,} from 'material-ui/styles/colors';
-
 import LinearProgress from 'material-ui/LinearProgress';
 import Dialog from 'material-ui/Dialog';
 
 import { Card, CardHeader, CardMedia, CardText} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 
-
+import '../styles/UploadRecipe.scss';
 
 
 class UploadRecipe extends Component{
@@ -109,10 +105,12 @@ class UploadRecipe extends Component{
 			const newState = Object.assign({}, this.state);
 
 			for(let keys in emptyFields){
-				
-				//TO DO ADD ERROR TEXT
-				var errField = `err_${keys}` 
-				newState[errField] = 'This is a required field.'
+				if(emptyFields.hasOwnProperty(keys)){
+
+					//TO DO ADD ERROR TEXT
+					var errField = `err_${keys}` 
+					newState[errField] = 'This is a required field.'
+				}
 				
 			}
 			this.setState(newState);
@@ -164,7 +162,7 @@ class UploadRecipe extends Component{
 					
 					<div className='row'>
 						
-						<div className='col-sm-8 col-sm-offset-2' style={{paddingLeft: 0, paddingRight: 0}}>
+						<div className='col-sm-6 col-sm-offset-3 --padlr0'>
 							<Card>
 								
 								<Card>
@@ -172,9 +170,9 @@ class UploadRecipe extends Component{
 										title={this.state.recipe_gif}
 									>
 									</CardHeader>
-									<CardMedia mediaStyle={{backgroundColor: pinkA100, height: 50+'vh', width: 100 + '%'}}>
+									<CardMedia className='uploadform__imgcontainer'>
 										
-											<img src={this.state.recipe_gif} alt='Recipe Gif' style={{height: 100 + '%'}}/>
+											<img src={this.state.recipe_gif} alt='Recipe Gif' className='--height100'/>
 										
 										
 									</CardMedia>
@@ -220,7 +218,7 @@ class UploadRecipe extends Component{
 
 								</CardText>
 
-								<RaisedButton primary={true} label='Upload Recipe' type='submit' style={{width: 100+ '%'}}></RaisedButton>
+								<RaisedButton primary={true} label='Upload Recipe' type='submit' className='--width100'></RaisedButton>
 							</Card>
 
 						</div>

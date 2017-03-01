@@ -5,10 +5,7 @@ import Nav from './Nav';
 
 
 class App extends Component {
-  constructor( props ){
-    super(props);
-
-  }
+  
   
 
   render() {

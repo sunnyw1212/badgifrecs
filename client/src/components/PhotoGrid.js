@@ -12,12 +12,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
-import { GridList, GridTile } from 'material-ui/GridList';
 import { List, ListItem } from 'material-ui/List'
-import IconButton from 'material-ui/IconButton';
-import FavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import FileUpload from 'material-ui/svg-icons/file/file-upload';
+
+import '../styles/PhotoGrid.scss';
 
 
 class PhotoGrid extends Component{
@@ -103,7 +102,7 @@ class PhotoGrid extends Component{
 							innerDivStyle={{paddingLeft: 85}}
 							primaryText={post.recipe_title}
 							secondaryText={`Posted By ${post.user.name}`}
-							leftIcon={<img style={{position:'absolute', top:0, left:0, margin: 0, marginRight: 5, height: 70, width: 70}} src={post.recipe_thumb}/>}
+							leftIcon={<img className='postlist__thumbnail' src={post.recipe_thumb} alt={post.recipe_title}/>}
 							
 						>
 							
@@ -165,6 +164,7 @@ class PhotoGrid extends Component{
 				if(post.data.preview && post.data.preview.images[0] && post.data.preview.images[0].variants && post.data.preview.images[0].variants.gif && post.data.preview.images[0].variants.gif.source){
 					return post
 				}
+				return null;
 			});
 			console.log('heres th gifs with gif previews', gifs)
 
@@ -177,7 +177,7 @@ class PhotoGrid extends Component{
 							innerDivStyle={{paddingLeft: 85}} 
 							primaryText={post.data.title}
 							secondaryText={`Posted By u/${post.data.author}`}
-							leftIcon={<img style={{position:'absolute', top:0, left:0, margin: 0, marginRight: 5, height: 70, width: 70}} src={post.data.thumbnail}/>}
+							leftIcon={<img className='postlist__thumbnail' src={post.data.thumbnail} alt='{post.data.title}'/>}
 						>
 							
 						</ListItem>
@@ -196,22 +196,22 @@ class PhotoGrid extends Component{
 				<List className='row'>
 					<div className="col-md-6">
 						<Subheader> BadGifRecipes Originals</Subheader>
-						<Divider style={{marginBottom: 16}}></Divider>
-						<div style={{maxHeight: 100 + 'vh', overflow: 'auto'}}>
+						<Divider className='--marb16'></Divider>
+						<div className='postlist__container'>
 							{this.renderOriginalPosts()}
 						</div>
 						
 					</div>
 					<div className="col-md-6" >
 						<Subheader>Courtesy of r/ShittyGifRecipes</Subheader>
-						<Divider style={{marginBottom: 16}}></Divider>
-						<div style={{maxHeight: 100 + 'vh', overflow: 'auto'}}>
+						<Divider className='--marb16'></Divider>
+						<div className='postlist__container'>
 							{this.renderRedditPosts()}
 						</div>
 						
 					</div>
 
-					<div className='hidden-xl hidden-lg hidden-md hidden-sm' style={{position: 'fixed', bottom: 10, right: 10}}>
+					<div className='hidden-xl hidden-lg hidden-md hidden-sm floatactbtn__container--fixed'>
 						<Link to='/upload'>
 							<FloatingActionButton mini={true}>
 								<FileUpload></FileUpload>

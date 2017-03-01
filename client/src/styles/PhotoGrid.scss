@@ -1,0 +1,23 @@
+.--marb16{
+	margin-bottom: 16px !important;
+}
+
+.postlist__container{
+	max-height: 100vh;
+	overflow: auto;
+}
+
+.postlist__thumbnail{
+	position: absolute !important;
+	top: 0px !important;
+	left: 0px !important;
+	margin: 0px 5px 0px 0px !important;
+	height: 70px !important;
+	width: 70px !important;
+}
+
+.floatactbtn__container--fixed{
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+}
