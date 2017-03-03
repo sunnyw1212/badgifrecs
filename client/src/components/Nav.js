@@ -21,6 +21,8 @@ import SocialPersonAdd from 'material-ui/svg-icons/social/person-add';
 import ActionAccountBox from 'material-ui/svg-icons/action/account-box';
 import SocialPersonOutline from 'material-ui/svg-icons/social/person-outline';
 
+import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
+
 import Headroom from 'react-headroom';
 
 import '../styles/Nav.scss';
@@ -119,6 +121,12 @@ class Nav extends Component{
 		if(this.props.currentUser.user){
 			return(
 				<Toolbar className='hidden-sm hidden-md hidden-lg hidden-xl toolbar__container'>
+					<ToolbarGroup firstChild={true}>
+						<IconButton iconStyle={{color: white}} touch={true}>
+							<NavigationArrowBack onClick={browserHistory.goBack}></NavigationArrowBack>
+							
+						</IconButton>
+					</ToolbarGroup>
 					<ToolbarGroup className='toolbar__toolbargroup'>
 						<Link to='/' className='toolbar__link'>
 							<IconButton iconStyle={{color: white}} touch={true}>
@@ -147,6 +155,12 @@ class Nav extends Component{
 		else{
 			return(
 				<Toolbar className='hidden-sm hidden-md hidden-lg hidden-xl toolbar__container'>
+					<ToolbarGroup firstChild={true}>
+						<IconButton iconStyle={{color: white}} touch={true}>
+							<NavigationArrowBack onClick={browserHistory.goBack}></NavigationArrowBack>
+							
+						</IconButton>
+					</ToolbarGroup>
 					<ToolbarGroup className='toolbar__toolbargroup'>
 						<Link to='/' className='toolbar__link'>
 							<IconButton iconStyle={{color: white}} touch={true}>

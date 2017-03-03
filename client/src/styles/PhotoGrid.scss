@@ -7,6 +7,14 @@
 	overflow: auto;
 }
 
+@media(max-width: 767px) {
+	.postlist__container{
+	
+		overflow: visible;
+		
+	}
+}
+
 .postlist__thumbnail{
 	position: absolute !important;
 	top: 0px !important;

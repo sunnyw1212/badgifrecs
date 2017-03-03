@@ -41,6 +41,13 @@ $pinkA100: rgb(255, 128, 171);
 }
 
 .viewtext__container{
-	max-height: 50vh;
+	max-height: 70vh;
 	overflow: auto;
+}
+
+@media(max-width: 767px){
+	.viewtext__container{
+		max-height: 45vh;
+		overflow: auto;
+	}
 }

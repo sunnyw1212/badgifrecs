@@ -40,7 +40,18 @@ class View extends Component{
 		this.props.actions.getRecipePosts(recipePostId);
 		this.props.actions.getRecipePosts();
 	}
-
+	
+	componentWillReceiveProps(nextProps){
+		if(this.props.location.pathname !== nextProps.location.pathname){
+			console.log(this.props.location.pathname, ' and next is', nextProps.location.pathname)
+			let currentUrl = window.location.href
+			let recipePostId = currentUrl.split('/').pop(); 
+			this.props.actions.getRecipePosts(recipePostId);
+			this.props.actions.getRecipePosts();
+			
+		}
+		
+	}
 	componentWillUnmount(){
 		//remove state remove props newCOmments
 		this.props.actions.resetNewComments();
@@ -372,31 +383,32 @@ class View extends Component{
 
 			console.log('this the new props in View', this.props)
 			return(
+				
 				<div className='row'>
-					<div className='col-sm-6 col-sm-offset-3 --padlr0'>
-						<StickyContainer>
+					<StickyContainer>
+						<div className='col-sm-6 col-sm-offset-1 --padlr0'>
 							<Card>
-
 								<Sticky>
-									<Card >
+									<Card>
 										<CardMedia className='cardmedia__imgcontainer'>
 								      <img src={ recipe_gif } className='--height100' alt={recipe_title}/>
 								    </CardMedia>
 									</Card>
 								</Sticky>
-								
-								<div className='viewtext__container'>
-									<Card>
-										<CardHeader 
-								    	title={recipe_title}
-								    	subtitle={`Posted By ${name}`}
-								    	children={this.renderNextRecipeBtn()}
-								    >
-								    	
-								    </CardHeader>
-								  
-									</Card>
-
+							</Card>	
+							<Card>
+								<CardHeader 
+						    	title={recipe_title}
+						    	subtitle={`Posted By ${name}`}
+						    	children={this.renderNextRecipeBtn()}
+						    >
+						    
+						    </CardHeader>
+						   
+							</Card>
+						</div>
+						<div className='col-sm-4 --padlr0'>
+							<div className='viewtext__container'>
 									<Card>
 							    	<CardTitle
 											title='Description'
@@ -432,17 +444,13 @@ class View extends Component{
 									<Card> 
 										<CardTitle
 											title='Comments'
-											showExpandableButton={true}
-											actAsExpander={true}
-											
-											
 										>
 											
 											
 										</CardTitle>
 										
 										<CardText
-										expandable={true}
+										
 										>
 											<List>
 												{this.renderNewComments()}
@@ -470,14 +478,22 @@ class View extends Component{
 										</CardText>
 										
 									</Card>
-								</div>
-								
-						
-							</Card>
-						</StickyContainer>
-						
-					</div>
+							</div>
+						</div>
+					</StickyContainer>
+					
+					
 				</div>
+
+
+
+
+
+
+
+
+
+				
 				
 
 

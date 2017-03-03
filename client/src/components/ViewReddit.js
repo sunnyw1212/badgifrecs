@@ -40,6 +40,18 @@ class ViewReddit extends Component{
 		this.props.actions.getRedditPosts();
 	}
 
+	componentWillReceiveProps(nextProps){
+		if(this.props.location.pathname !== nextProps.location.pathname){
+			console.log(this.props.location.pathname, ' and next is', nextProps.location.pathname)
+			let currentUrl = window.location.href
+			let recipePostId = currentUrl.split('/').pop(); 
+			this.props.actions.getRedditPost(recipePostId);
+			this.props.actions.getRedditPosts();
+			
+		}
+		
+	}
+
 	handleToggle = () => {
 		let newState = Object.assign({}, this.state );
 		newState['open'] = !this.state.open; 
@@ -172,64 +184,56 @@ class ViewReddit extends Component{
 			console.log('this the new props in viewReddit', this.props)
 			return(
 				<div className='row'>
-					<div className='col-sm-6 col-sm-offset-3 --padlr0'>
-						<StickyContainer>
+					<StickyContainer>
+						<div className='col-sm-6 col-sm-offset-1 --padlr0'>
 							<Card>
-								
 								<Sticky>
-									<Card >
+									<Card>
 										<CardMedia className='cardmedia__imgcontainer'>
 								      <img src={ url } className='--height100' alt={title}/>
 								    </CardMedia>
 									</Card>
 								</Sticky>
-								
-								
-								
-								<div className='viewtext__container'>
-									<Card>
-										<CardHeader 
-								    	title={title}
-								    	subtitle={`Posted By u/${author}`}
-											children={this.renderNextRecipeBtn()}
-								    >
-								    
-								    </CardHeader>
-								   
-									</Card>
-									
-							    
-
-									<Card>
-										<CardTitle
-											title='Comments'
-											showExpandableButton={true}
-											actAsExpander={true}
-											
-											
-										>
-											
-											
-										</CardTitle>
-										
-										<CardText
-											expandable={true}
-										>
-											<List>
-												{this.renderRedditPostComments()}
-											</List>
-											
-										</CardText>
-									
-									</Card>
-								</div>
-								
-						
+							</Card>	
+							<Card>
+								<CardHeader 
+						    	title={title}
+						    	subtitle={`Posted By u/${author}`}
+									children={this.renderNextRecipeBtn()}
+						    >
+						    
+						    </CardHeader>
+						   
 							</Card>
-						</StickyContainer>
-					</div>
+						</div>
+						<div className='col-sm-4 --padlr0'>
+							<div className='viewtext__container'>
+								<Card>
+									<CardTitle
+										title='Comments'
+									>
+										
+										
+									</CardTitle>
+									
+									<CardText
+										
+									>
+										<List>
+											{this.renderRedditPostComments()}
+										</List>
+										
+									</CardText>
+								
+								</Card>
+							</div>
+						</div>
+					</StickyContainer>
+					
 					
 				</div>
+
+				
 				
 
 
