@@ -2,6 +2,7 @@ $pinkA200: rgb(255, 64, 129);
 $white: #fff;
 
 
+
 .toolbar__container{
 	background-color: $pinkA200 !important;
 	box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px !important;
@@ -34,4 +35,8 @@ $white: #fff;
 	align-self:center;
 	color: $white;
 	font-size: 18px;
+}
+
+.--left0{
+	left: 0px;
 }

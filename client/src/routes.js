@@ -9,6 +9,8 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import UploadRecipe from './components/UploadRecipe';
+import MyPosts from './components/MyPosts';
+import EditRecipe from './components/EditRecipe';
 
 export default (
 	
@@ -20,6 +22,8 @@ export default (
 		<Route path='login' component={Login}></Route>
 		<Route path='logout' component={Logout}></Route>
 		<Route path='upload' component={UploadRecipe}></Route>
+		<Route path='myposts' component={MyPosts}></Route>
+		<Route path='editrecipe/:id' component={EditRecipe}></Route>
 	</Route>
 );
 	

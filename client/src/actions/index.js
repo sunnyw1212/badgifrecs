@@ -10,10 +10,24 @@ export const GET_RECIPEPOST_LOAD = 'GET_RECIPEPOST_LOAD';
 export const GET_RECIPEPOST_SUCCESS = 'GET_RECIPEPOST_SUCCESS';
 export const GET_RECIPEPOST_FAIL = 'GET_RECIPEPOST_FAIL';
 
+export const GET_MYRECIPEPOSTS_LOAD = 'GET_MYRECIPEPOSTS_LOAD';
+export const GET_MYRECIPEPOSTS_SUCCESS = 'GET_MYRECIPEPOSTS_SUCCESS';
+export const GET_MYRECIPEPOSTS_FAIL = 'GET_MYRECIPEPOSTS_FAIL';
+
 export const CREATE_RECIPEPOST = 'CREATE_RECIPEPOST';
 export const CREATE_RECIPEPOST_LOAD = 'CREATE_RECIPEPOST_LOAD';
 export const CREATE_RECIPEPOST_SUCCESS = 'CREATE_RECIPEPOST_SUCCESS';
 export const CREATE_RECIPEPOST_FAIL = 'CREATE_RECIPEPOST_FAIL';
+
+export const EDIT_RECIPEPOST = 'EDIT_RECIPEPOST';
+export const EDIT_RECIPEPOST_LOAD = 'EDIT_RECIPEPOST_LOAD';
+export const EDIT_RECIPEPOST_SUCCESS = 'EDIT_RECIPEPOST_SUCCESS';
+export const EDIT_RECIPEPOST_FAIL = 'EDIT_RECIPEPOST_FAIL';
+
+export const DELETE_RECIPEPOST = 'DELETE_RECIPEPOST';
+export const DELETE_RECIPEPOST_LOAD = 'DELETE_RECIPEPOST_LOAD';
+export const DELETE_RECIPEPOST_SUCCESS = 'DELETE_RECIPEPOST_SUCCESS';
+export const DELETE_RECIPEPOST_FAIL = 'DELETE_RECIPEPOST_FAIL';
 
 export const GET_REDDITPOSTS = 'GET_REDDITPOSTS';
 export const GET_REDDITPOSTS_LOAD = 'GET_REDDITPOSTS_LOAD';
@@ -57,7 +71,7 @@ if (window.location.hostname === 'badgifrecipes.herokuapp.com') {
 
 //CLEAN ALL THIS UP WRITE IT ALL USING REDUX THUNKS
 
-export function getRecipePosts( id = '' ){
+export function getRecipePosts( id = '', name = '' ){
 	if( id ){
 		return (dispatch) => {
 			dispatch(getRecipePostLoad());
@@ -69,6 +83,22 @@ export function getRecipePosts( id = '' ){
 				error => {
 					console.log('error in action getrecipepost', error);
 					dispatch(getRecipePostFail('We can\'t get this Recipe from our servers right now.'));
+				}
+			);//end .then()
+		}//end thunk 
+	}
+	//if name is present
+	else if( name ){
+		return (dispatch) => {
+			dispatch(getMyRecipePostsLoad());
+			axios.get(`${ROOT_URL}/api/recipeposts?name=${name}`).then(
+				//recipepost arg = array of recipeposts returned from axios get 
+				myrecipeposts => {
+					dispatch(getMyRecipePostsSuccess(myrecipeposts));
+				},
+				error => {
+					console.log('error in action getmyrecipeposts', error);
+					dispatch(getMyRecipePostsFail('We can\'t get these Recipes from our servers right now.'));
 				}
 			);//end .then()
 		}//end thunk 
@@ -108,6 +138,26 @@ function getRecipePostSuccess(recipepost){
 function getRecipePostFail(errMessage){
 	return {
 		type: GET_RECIPEPOST_FAIL,
+		payload: errMessage
+	}
+}
+
+function getMyRecipePostsLoad(){
+	return{
+		type: GET_MYRECIPEPOSTS_LOAD
+	}
+}
+
+function getMyRecipePostsSuccess(myrecipeposts){
+	return {
+		type: GET_MYRECIPEPOSTS_SUCCESS,
+		payload: myrecipeposts
+	}
+}
+
+function getMyRecipePostsFail(errMessage){
+	return {
+		type: GET_MYRECIPEPOSTS_FAIL,
 		payload: errMessage
 	}
 }
@@ -268,6 +318,96 @@ function createRecipePostSuccess(newRecipePost){
 function createRecipePostFail(errMessage){
 	return {
 		type: CREATE_RECIPEPOST_FAIL,
+		payload: errMessage
+	}
+}
+
+export function editRecipePost( id = '', data){
+	if(id){
+		return (dispatch)=>{
+			dispatch(editRecipePostLoad());
+			axios.put(`${ROOT_URL}/api/recipeposts/${id}`, data).then(
+				editedrecipepost =>{
+					browserHistory.push(`/view/${id}`);
+					dispatch(editRecipePostSuccess(editedrecipepost));
+				},
+				error =>{
+					console.log('error in action editedrecipepost', error);
+					dispatch(editRecipePostFail('We can\'t update your Recipe right now.'));
+				}
+			)//end .then()
+		}//end thunk
+	}
+	//if no id return fail
+	else{
+		return (dispatch)=>{
+			console.log('no id present in edit request')
+			dispatch(editRecipePostFail('We can\'t update your Recipe right now.'));
+		}
+	}
+}
+
+function editRecipePostLoad(){
+	return{
+		type: EDIT_RECIPEPOST_LOAD
+	}
+}
+
+function editRecipePostSuccess(editedRecipePost){
+	return{
+		type: EDIT_RECIPEPOST_SUCCESS,
+		payload: editedRecipePost
+	}
+}
+
+function editRecipePostFail(errMessage){
+	return{
+		type: EDIT_RECIPEPOST_FAIL,
+		payload: errMessage
+	}
+}
+
+export function deleteRecipePost( id = '' ){
+	if( id ){
+		return (dispatch) => {
+			dispatch(deleteRecipePostLoad());
+			axios.delete(`${ROOT_URL}/api/recipeposts/${id}`).then(
+				//recipepost arg = array of recipeposts returned from axios get 
+				recipepost => {
+					dispatch(deleteRecipePostSuccess(recipepost));
+				},
+				error => {
+					console.log('error in action delteRecipePost', error);
+					dispatch(deleteRecipePostFail('We can\'t delete this Recipe right now.'));
+				}
+			);//end .then()
+		}//end thunk 
+	}
+	//if no id then reutrn fail
+	else{
+		return(dispatch)=>{
+			console.log('no id present in delete request')
+			dispatch(deleteRecipePostFail('We can\'t delete this Recipe right now.'))
+		}
+	}
+}
+
+function deleteRecipePostLoad(){
+	return{
+		type: DELETE_RECIPEPOST_LOAD
+	}
+}
+
+function deleteRecipePostSuccess(deletedPost){
+	return{
+		type: DELETE_RECIPEPOST_SUCCESS,
+		payload: deletedPost
+	}
+}
+
+function deleteRecipePostFail(errMessage){
+	return{
+		type: DELETE_RECIPEPOST_FAIL,
 		payload: errMessage
 	}
 }

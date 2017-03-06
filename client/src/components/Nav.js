@@ -20,6 +20,7 @@ import FileUpload from 'material-ui/svg-icons/file/file-upload';
 import SocialPersonAdd from 'material-ui/svg-icons/social/person-add';
 import ActionAccountBox from 'material-ui/svg-icons/action/account-box';
 import SocialPersonOutline from 'material-ui/svg-icons/social/person-outline';
+import ImageCollections from 'material-ui/svg-icons/image/collections';
 
 import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 
@@ -64,6 +65,11 @@ class Nav extends Component{
 					</Link>
 					<Link to='/upload' onClick={this.handleToggle}>
 						<MenuItem primaryText='Upload' leftIcon={<FileUpload/>}>
+							
+						</MenuItem>
+					</Link>
+					<Link to='/myposts' onClick={this.handleToggle}>
+						<MenuItem primaryText='My Posts' leftIcon={<ImageCollections/>}>
 							
 						</MenuItem>
 					</Link>
@@ -139,6 +145,12 @@ class Nav extends Component{
 								<FileUpload></FileUpload>
 							</IconButton>
 							<span className='toolbar__label'>Upload</span>
+						</Link>
+						<Link to='/myposts' className='toolbar__link'>
+							<IconButton iconStyle={{color: white}} touch={true}>
+								<ImageCollections></ImageCollections>
+							</IconButton>
+							<span className='toolbar__label --left0'>My Posts</span>
 						</Link>
 						<Link to='/logout' className='toolbar__link'>
 							<IconButton iconStyle={{color: white}} touch={true}>
