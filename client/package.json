@@ -55,6 +55,7 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-dropzone": "^3.9.2",
+    "react-ga": "^2.1.2",
     "react-headroom": "^2.1.3",
     "react-infinite-scroller": "^1.0.7",
     "react-redux": "^5.0.2",

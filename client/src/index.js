@@ -25,6 +25,15 @@ import thunk from 'redux-thunk';
 
 import { saveState } from './snippets/helpers';
 
+//google analystics config
+import ReactGA from 'react-ga';
+ReactGA.initialize('UA-93249304-1');
+
+function logPageView(){
+  ReactGA.set({page: window.location.pathname});
+  ReactGA.pageview(window.location.pathname);
+}
+
 //Needed from onTOuchTap overrides ios 300ms tap delay
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
@@ -67,7 +76,7 @@ store.subscribe(()=>{
 ReactDOM.render(
 	<Provider store={store}>
 		<MuiThemeProvider muiTheme={muiTheme}>
-			<Router history={browserHistory} routes={routes} />
+			<Router history={browserHistory} routes={routes} onUpdate={logPageView} />
 	  </MuiThemeProvider>
   </Provider>,
   document.getElementById('root')

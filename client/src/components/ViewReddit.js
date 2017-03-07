@@ -70,7 +70,7 @@ class ViewReddit extends Component{
 	}
 
 	handleImgLoadFailed = (backupLinkUrl, thumbnail, title)=>{
-
+		
 		let a = document.createElement('a');
 		a.setAttribute('href', backupLinkUrl);
 		
@@ -82,6 +82,11 @@ class ViewReddit extends Component{
 		a.append(img)
 
 		document.getElementById('backup').append(a)
+
+		// let iframe = document.createElement('iframe');
+		// iframe.setAttribute('src', backupLinkUrl)
+		// iframe.className = 'cardmedia__backupimg'
+		// document.getElementById('backup').append(iframe)
 		
 		let newState = Object.assign({}, this.state );
 		newState['imgLoaded'] = false; 
