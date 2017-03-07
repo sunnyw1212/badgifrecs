@@ -15,6 +15,12 @@ router.get('/recipeposts/:id', controller.recipepost.getPosts);
 //post create new recipe
 router.post('/recipeposts', controller.recipepost.createPost);
 
+//put update recipe
+router.put('/recipeposts/:id', controller.recipepost.editPost);
+
+//delete recipe
+router.delete('/recipeposts/:id', controller.recipepost.deletePost);
+
 //post create new comment
 router.post('/comment', controller.comment.createComment);
 

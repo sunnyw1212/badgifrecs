@@ -245,7 +245,7 @@ class EditRecipe extends Component{
 
 								</CardText>
 
-								<RaisedButton primary={true} label='Upload Recipe' type='submit' className='--width100'></RaisedButton>
+								<RaisedButton primary={true} label='Update Recipe' type='submit' className='--width100'></RaisedButton>
 							</Card>
 
 						</div>

@@ -19,6 +19,29 @@ const RecipePostSchema = mongoose.Schema({
 	timestamp: { type: Date, default: Date.now }
 });
 
+
+RecipePostSchema.pre('remove', function(next){
+	
+	console.log('hey youre removing a recipepostschema')
+	//update to remove recipepost id from User model
+	this.model('User').update(
+		{recipepost_ids: this._id},
+		{ $pull: {recipepost_ids: this._id}},
+		{multi: true},
+		next
+	);
+	//update to remove comment id from User model
+	this.model('User').update(
+		{},//query
+		{ $pull: {comment_ids: { $in: this.comment_ids } } },//update
+		{multi: true},//option
+		next//callback
+	);
+	
+	//delete comments that belong to the recipe post being deleted
+	this.model('Comment').remove({post_id: this._id}).exec();
+});
+
 let RecipePost = module.exports = mongoose.model('RecipePost', RecipePostSchema);
 
 // module.exports.saveURL = function( newURL, callback ){

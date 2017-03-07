@@ -123,19 +123,22 @@ class MyPosts extends Component{
 						primaryText={<Link to={`/view/${post._id}`}>{post.recipe_title}</Link>}
 						secondaryText={`Posted ${new Date(post.timestamp).toLocaleDateString()}`}
 						leftIcon={
-							<Link key={post._id} to={`/view/${post._id}`} style={{height: 0, width: 0, top: 0, margin: 0, left: 0}}>
+							<Link key={post._id} to={`/view/${post._id}`} className='postlist__thumbnailcontainer'>
 								<img className='postlist__thumbnail' src={post.recipe_thumb} alt={post.recipe_title}/>
 							</Link>
 						}
 						
 						
 					>
-						<div style={{position: 'absolute', right: 5,display: 'inline-block'}}>
+						<div className='postlist__btncontainer'>
 							<Link key={post._id} to={`/editrecipe/${post._id}`} >
-								<IconButton tooltip='Edit'><EditorModeEdit/></IconButton>
-					 
+								<IconButton tooltip='Edit' touch={true} iconStyle={{color: 'rgb(117,117,117)'}}>
+									<EditorModeEdit/>
+								</IconButton>
 					    </Link>
-					    <IconButton tooltip='Delete' onTouchTap={this.handleDeleteRecipePost.bind(this, post._id)}><ActionDelete/></IconButton>
+					    <IconButton tooltip='Delete' onTouchTap={this.handleDeleteRecipePost.bind(this, post._id)} touch={true} iconStyle={{color: 'rgb(117,117,117)'}}>
+					    	<ActionDelete/>
+					    </IconButton>
 						</div>
 								
 						    
