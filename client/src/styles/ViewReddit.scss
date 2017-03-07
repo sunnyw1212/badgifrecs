@@ -1,5 +1,6 @@
 $grey: rgba(0, 0, 0, 0.541176);
 $pinkA100: rgb(255, 128, 171);
+$white: rgb(255, 255, 255);
 
 .--unavailable{
 	color: $grey;
@@ -34,10 +35,26 @@ $pinkA100: rgb(255, 128, 171);
 	background-color: $pinkA100;
 }
 
+.cardmedia__backupimg{
+	height: 50vh !important;
+	width: 100% !important;
+	background-color: $pinkA100;
+}
+
+.backup__icon{
+	position: absolute !important;
+	right: 5px !important;
+	top: 5px !important; 
+	color: $white !important;
+}
+
 @media(max-width: 1439px){
 	.cardmedia__imgcontainer > div{
 			height: 40vh !important;
-		}
+	}
+	.cardmedia__backupimg{
+			height: 40vh !important;
+	}
 }
 
 .viewtext__container{

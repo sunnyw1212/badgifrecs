@@ -3,6 +3,8 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 
+import classnames from 'classnames';
+
 import {getRedditPost, getRedditPosts} from '../actions/';
 
 import LinearProgress from 'material-ui/LinearProgress';
@@ -15,6 +17,8 @@ import { Card, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Ca
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 
+import ActionLaunch from 'material-ui/svg-icons/action/launch';
+
 import {StickyContainer, Sticky} from 'react-sticky';
 
 import '../styles/ViewReddit.scss';
@@ -25,7 +29,8 @@ class ViewReddit extends Component{
 	constructor(props){
 		super(props)
 		this.state = {
-			open: false
+			open: false,
+			imgLoaded: false
 		};
 		this.handleNextRecipe = this.handleNextRecipe.bind(this);
 		
@@ -57,6 +62,32 @@ class ViewReddit extends Component{
 		newState['open'] = !this.state.open; 
 		this.setState(newState);
 	};
+
+	handleImgLoaded = () => {
+		let newState = Object.assign({}, this.state );
+		newState['imgLoaded'] = true; 
+		this.setState(newState);
+	}
+
+	handleImgLoadFailed = (backupLinkUrl, thumbnail, title)=>{
+
+		let a = document.createElement('a');
+		a.setAttribute('href', backupLinkUrl);
+		
+		let img = document.createElement('img')
+		img.setAttribute('src', thumbnail)
+		img.setAttribute('alt', title)
+		img.className = 'cardmedia__backupimg'
+		
+		a.append(img)
+
+		document.getElementById('backup').append(a)
+		
+		let newState = Object.assign({}, this.state );
+		newState['imgLoaded'] = false; 
+		this.setState(newState);		
+		
+	}
 
 	handleNextRecipe = () =>{
 		let {posts} = this.props.redditAll;
@@ -144,7 +175,14 @@ class ViewReddit extends Component{
 	}
 
 	render(){
-		
+		let gifImgClass = classnames({
+			'--height100': true,
+			'hidden': !this.state.imgLoaded
+		});
+
+		let backupClass = classnames({
+			'hidden': this.state.imgLoaded
+		});
 
     //if error
 		if(this.props.redditSingle.error){
@@ -177,8 +215,9 @@ class ViewReddit extends Component{
 		
 		//if success
 		else{
+			let backupLinkUrl = this.props.redditSingle.post[0].data.children[0].data.url
 			let { url } = this.props.redditSingle.post[0].data.children[0].data.preview.images[0].variants.gif.source;
-			let { title, author } = this.props.redditSingle.post[0].data.children[0].data;
+			let { title, author, thumbnail } = this.props.redditSingle.post[0].data.children[0].data;
 			
 
 			console.log('this the new props in viewReddit', this.props)
@@ -190,7 +229,12 @@ class ViewReddit extends Component{
 								<Sticky>
 									<Card>
 										<CardMedia className='cardmedia__imgcontainer'>
-								      <img src={ url } className='--height100' alt={title}/>
+											
+											<div id='backup' className={backupClass}>
+												<ActionLaunch className='backup__icon' onClick={()=>{window.location.href = backupLinkUrl}}></ActionLaunch>
+												
+											</div>
+								      <img id='gifImg' src={ url } onLoad={this.handleImgLoaded} onError={this.handleImgLoadFailed.bind( this, backupLinkUrl, thumbnail, title)} className={gifImgClass} alt={title}/>
 								    </CardMedia>
 									</Card>
 								</Sticky>

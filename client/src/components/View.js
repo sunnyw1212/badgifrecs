@@ -3,6 +3,8 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
 
+import classnames from 'classnames';
+
 import { getRecipePosts, createComment, resetNewComments } from '../actions/';
 
 import LinearProgress from 'material-ui/LinearProgress';
@@ -27,6 +29,7 @@ class View extends Component{
 		super(props)
 		this.state = {
 			open: false,
+			imgLoaded: false,
 			text_body: '',
 			err_text_body: ''
 		};
@@ -57,13 +60,19 @@ class View extends Component{
 		this.props.actions.resetNewComments();
 	}
 
-
+	
 
 	handleToggle = () => {
 		let newState = Object.assign({}, this.state );
 		newState['open'] = !this.state.open; 
 		this.setState(newState);
 	};
+
+	handleImgLoaded = () => {
+		let newState = Object.assign({}, this.state );
+		newState['imgLoaded'] = true; 
+		this.setState(newState);
+	}
 
 	handleTextChange = (inputElement, e) => {
 
@@ -345,6 +354,10 @@ class View extends Component{
 	}
 
 	render(){
+		let gifImgClass = classnames({
+			'--height100': true,
+			'hidden': !this.state.imgLoaded
+		});
 		
 		//if error
 		if(this.props.originalSingle.error){
@@ -391,7 +404,7 @@ class View extends Component{
 								<Sticky>
 									<Card>
 										<CardMedia className='cardmedia__imgcontainer'>
-								      <img src={ recipe_gif } className='--height100' alt={recipe_title}/>
+								      <img id='gifImg' src={ recipe_gif } onLoad={this.handleImgLoaded} className={gifImgClass} alt={recipe_title}/>
 								    </CardMedia>
 									</Card>
 								</Sticky>
