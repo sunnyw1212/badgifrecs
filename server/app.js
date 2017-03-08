@@ -30,6 +30,7 @@ let app = express();
 const compression = require('compression');
 app.use(compression());
 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -76,8 +77,11 @@ app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 
+//enable browser cache headers
+let cacheTime = 86400000 * 7; //7 days
+
 //set static folder  serve static assets normally from this folder
-app.use(express.static(path.join(__dirname, 'public'))); //was 'public'
+app.use(express.static(path.join(__dirname, 'public'), {maxAge: cacheTime} )); //was 'public'
 
 //global vars
 app.use( function(req, res, next){

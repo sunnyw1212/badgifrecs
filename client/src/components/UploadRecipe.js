@@ -102,17 +102,25 @@ class UploadRecipe extends Component{
 
 		if( Object.keys(emptyFields).length > 0){
 			console.log('Error', emptyFields);
-			const newState = Object.assign({}, this.state);
+			let newState = Object.assign({}, this.state);
 
 			for(let keys in emptyFields){
 				if(emptyFields.hasOwnProperty(keys)){
 
 					//TO DO ADD ERROR TEXT
-					var errField = `err_${keys}` 
+					let errField = `err_${keys}` 
 					newState[errField] = 'This is a required field.'
 				}
 				
 			}
+			this.setState(newState);
+			return false;
+		}
+
+		if( requiredFields['recipe_gif'] === 'http://i.imgur.com/uHHH9cE.gif'){
+			let newState = Object.assign({}, this.state);
+			let errField = 'err_recipe_gif';
+			newState[errField] = 'Please submit a NEW Gif Recipe.' 
 			this.setState(newState);
 			return false;
 		}
