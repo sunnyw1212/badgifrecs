@@ -68,7 +68,7 @@ if (window.location.hostname === 'badgifrecipes.herokuapp.com') {
   ROOT_URL = 'https://badgifrecipes.herokuapp.com';
 }
 if (window.location.hostname === 'www.badgifrecipes.club') {
-  ROOT_URL = 'https://badgifrecipes.club';
+  ROOT_URL = 'www.badgifrecipes.club';
 }
 
 
