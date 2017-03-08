@@ -109,9 +109,10 @@ export function getRecipePosts( id = '', name = '' ){
 	else{
 		return (dispatch) => {
 			dispatch(getRecipePostsLoad());
-			axios.get(`${ROOT_URL}/api/recipeposts/`).then(
+			axios.get(`${ROOT_URL}/api/recipeposts`).then(
 				//recipeposts arg = array of recipeposts returned from axios get 
 				recipeposts => {
+					console.log('HERE ARE THE RECIPEpostsSuCCESS', recipeposts)
 					dispatch(getRecipePostsSuccess(recipeposts));
 				},
 				error => {
