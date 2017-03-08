@@ -116,6 +116,7 @@
 				//save thumbnail
 				imageMagick(file)
 					.selectFrame(0)
+					.resize(70, 70)
 					.setFormat('jpg')
 					.write(thumbFilename, function(err){
 						if(err){
