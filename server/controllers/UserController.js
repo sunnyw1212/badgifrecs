@@ -53,9 +53,6 @@
 			} );
 
 		},
-		put: function(){},
-
-		delete: function(){},
 
 
 		register: function( req, res ){

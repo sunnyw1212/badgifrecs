@@ -91,9 +91,5 @@
 				sendJsonResponse( res, 200, result );
 				return
 			});
-		},
-
-		put: function(){},
-
-		delete: function(){}
+		}//end createComment
 	}

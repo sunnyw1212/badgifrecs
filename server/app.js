@@ -10,7 +10,9 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
 const mongoose = require('mongoose');
-const mongoURL = 'mongodb://sunnybadgifrecipes:badgifrecipes@ds161029.mlab.com:61029/badgifrecipes';
+require('dotenv').config();
+
+const mongoURL = process.env.MONGO_URL;
 
 require('./config/cloudinary');
 
@@ -57,7 +59,7 @@ app.use(bodyParser.json( {limit: '200mb', type: 'application/json'} ));
 app.use(bodyParser.urlencoded({ limit: '200mb', extended: true, parameterLimit: 50000 }));
 //express-session middleware
 app.use(session({
-  secret: 'recipe rundown',
+  secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: true
 }));

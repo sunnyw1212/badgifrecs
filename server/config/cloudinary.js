@@ -1,7 +1,7 @@
 const cloudinary = require('cloudinary');
-const CLOUDINARY_NAME = 'qwertwerty21';
-const CLOUDINARY_API_KEY = '365155531524953';
-const CLOUDINARY_API_SECRET = 'gAL0Hjh1nT9y06E68FZRLFh78Bw';
+const CLOUDINARY_NAME = process.env.CLOUDINARY_NAME;
+const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY;
+const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET;
 
 
 cloudinary.config({
