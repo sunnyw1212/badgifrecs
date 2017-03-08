@@ -341,21 +341,21 @@ class View extends Component{
 		}
 
 		else{
-			let {posts} = this.props.originalAll;
-			let currentUrl = window.location.href
-			let originalPostId = currentUrl.split('/').pop(); 
+			// let {posts} = this.props.originalAll;
+			// let currentUrl = window.location.href
+			// let originalPostId = currentUrl.split('/').pop(); 
 			
-			//get current post's index in gifs array
-			var currentPostIndex = posts.map((post)=>{
-				return post._id
-			}).indexOf(originalPostId);
-			console.log('this is the currentPostIndex ', currentPostIndex)
-			//get next recipe id 
-			let nextRecipe = posts[currentPostIndex + 1] ? posts[currentPostIndex + 1] : posts[0]
+			// //get current post's index in gifs array
+			// var currentPostIndex = posts.map((post)=>{
+			// 	return post._id
+			// }).indexOf(originalPostId);
+			// console.log('this is the currentPostIndex ', currentPostIndex)
+			// //get next recipe id 
+			// let nextRecipe = posts[currentPostIndex + 1] ? posts[currentPostIndex + 1] : posts[0]
 
-			//preload next recipe img gif
-			let preloadImg = new Image();
-			preloadImg.src = nextRecipe['recipe_gif']
+			// //preload next recipe img gif
+			// let preloadImg = new Image();
+			// preloadImg.src = nextRecipe['recipe_gif']
 
 			return(
 				<RaisedButton
