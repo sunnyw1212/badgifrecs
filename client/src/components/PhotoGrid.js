@@ -169,6 +169,11 @@ class PhotoGrid extends Component{
 			console.log('heres th gifs with gif previews', gifs)
 
 			return gifs.map((post, index)=>{
+				//preload the first 10 gifs
+				// if( index < 5){
+				// 	let preloadImg = new Image();
+				// 	preloadImg.src = post.data.preview.images[0].variants.gif.source.url;
+				// }
 				
 				return(
 

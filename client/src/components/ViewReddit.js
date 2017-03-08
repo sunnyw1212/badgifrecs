@@ -106,13 +106,17 @@ class ViewReddit extends Component{
 			}
 			return null;
 		});
+		console.log('GIFS', gifs)
 		//get current post's index in gifs array
 		var currentGifIndex = gifs.map((gif)=>{
 			return gif.data.id
 		}).indexOf(redditPostId);
 		
+
 		//get next recipe id 
 		let nextRecipeId = gifs[currentGifIndex + 1] ? gifs[currentGifIndex + 1].data.id : gifs[0].data.id
+
+		
 		console.log('heres the next page', nextRecipeId)
 
 
@@ -167,6 +171,30 @@ class ViewReddit extends Component{
 		}
 
 		else{
+			let {posts} = this.props.redditAll;
+			let currentUrl = window.location.href
+			let redditPostId = currentUrl.split('/').pop(); 
+			
+			//only return posts with actual gif sources
+			let gifs = posts.filter((post, index, array )=>{
+				if(post.data.preview && post.data.preview.images[0] && post.data.preview.images[0].variants && post.data.preview.images[0].variants.gif && post.data.preview.images[0].variants.gif.source){
+					return post
+				}
+				return null;
+			});
+			console.log('GIFS', gifs)
+			//get current post's index in gifs array
+			var currentGifIndex = gifs.map((gif)=>{
+				return gif.data.id
+			}).indexOf(redditPostId);
+			
+			
+			//get next recipe id 
+			let nextRecipe = gifs[currentGifIndex + 1] ? gifs[currentGifIndex + 1].data : gifs[0].data
+
+			//preload next recipe img gif
+			let preloadImg = new Image();
+			preloadImg.src = nextRecipe.preview.images[0].variants.gif.source.url;
 			return(
 				<RaisedButton
 					label='Next Recipe'
@@ -188,6 +216,11 @@ class ViewReddit extends Component{
 		let backupClass = classnames({
 			'hidden': this.state.imgLoaded
 		});
+
+		let loadingTextClass = classnames({
+			'--unavailable': true,
+			'hidden': this.state.imgLoaded
+		})
 
     //if error
 		if(this.props.redditSingle.error){
@@ -234,7 +267,7 @@ class ViewReddit extends Component{
 								<Sticky>
 									<Card>
 										<CardMedia className='cardmedia__imgcontainer'>
-											
+											<span className={loadingTextClass}>Loading...</span>
 											<div id='backup' className={backupClass}>
 												<ActionLaunch className='backup__icon' onClick={()=>{window.location.href = backupLinkUrl}}></ActionLaunch>
 												

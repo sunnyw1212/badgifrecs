@@ -2,6 +2,40 @@ $grey: rgba(0, 0, 0, 0.541176);
 $pinkA100: rgb(255, 128, 171);
 $white: rgb(255, 255, 255);
 
+
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+
+@mixin animation($animate...) {
+    $max: length($animate);
+    $animations: '';
+
+    @for $i from 1 through $max {
+        $animations: #{$animations + nth($animate, $i)};
+
+        @if $i < $max {
+            $animations: #{$animations + ", "};
+        }
+    }
+    -webkit-animation: $animations;
+    -moz-animation:    $animations;
+    -o-animation:      $animations;
+    animation:         $animations;
+}
+
+
 .--unavailable{
 	color: $grey;
 }
@@ -32,7 +66,23 @@ $white: rgb(255, 255, 255);
 .cardmedia__imgcontainer > div{
 	height: 50vh !important;
 	width: 100% !important;
+	
+	background-image: url('http://res.cloudinary.com/qwertwerty21/image/upload/v1488992988/food_c2sqh2.png');
 	background-color: $pinkA100;
+	@include animation( "sidescroll 60s linear infinite" );
+}
+
+//KEYFRAMES SIDESCROLL
+
+@include keyframes( sidescroll ){
+	
+	0%{
+     background-position: 0 0;
+ 	}
+
+ 	100%{
+     background-position: 1500px 2000px;
+ 	}
 }
 
 .cardmedia__backupimg{
@@ -54,6 +104,24 @@ $white: rgb(255, 255, 255);
 	}
 	.cardmedia__backupimg{
 			height: 40vh !important;
+	}
+}
+
+@media(max-width: 425px){
+	.cardmedia__imgcontainer > div{
+			height: 35vh !important;
+	}
+	.cardmedia__backupimg{
+			height: 35vh !important;
+	}
+}
+
+@media(max-width: 320px){
+	.cardmedia__imgcontainer > div{
+			height: 30vh !important;
+	}
+	.cardmedia__backupimg{
+			height: 30vh !important;
 	}
 }
 
