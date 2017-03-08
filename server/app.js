@@ -26,6 +26,10 @@ const routes = require('./routes/');
 //init express instance
 let app = express();
 
+//use gzip compression
+const compression = require('compression');
+app.use(compression());
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
