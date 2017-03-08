@@ -1,5 +1,11 @@
+$grey: rgba(0, 0, 0, 0.541176);
+
 .--marb16{
 	margin-bottom: 16px !important;
+}
+
+.--unavailable{
+	color: $grey;
 }
 
 .postlist__container{

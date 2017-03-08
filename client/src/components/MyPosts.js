@@ -106,52 +106,60 @@ class MyPosts extends Component{
     //loaded posts successfully
     else{
     	console.log('Loaded! curent state:',this.props)
-	    return this.props.originalMyRecipePosts.posts.map((post, index) => {
-	    	// let img = post.recipe_thumb;
-	    	// let imgpath;
-	    	// console.log('IMG', img, 'post', post)
-	    	// if(img){
-	    	// 	imgpath = '/' + img.split('/').slice(2).join('/')
-	    	// }
-	    	// console.log('imgpath', imgpath)
-	      return (
+    	if(this.props.originalMyRecipePosts.posts.length < 1){
+    		return(
+					<div className='--unavailable'>You currently don't have any Posts.</div>
+    		)
+    	}
+    	else{
 
-				
-					<ListItem
-						key={post._id}
-						innerDivStyle={{paddingLeft: 85}}
-						primaryText={<Link to={`/view/${post._id}`}>{post.recipe_title}</Link>}
-						secondaryText={`Posted ${new Date(post.timestamp).toLocaleDateString()}`}
-						leftIcon={
-							<Link key={post._id} to={`/view/${post._id}`} className='postlist__thumbnailcontainer'>
-								<img className='postlist__thumbnail' src={post.recipe_thumb} alt={post.recipe_title}/>
-							</Link>
-						}
+		    return this.props.originalMyRecipePosts.posts.map((post, index) => {
+		    	// let img = post.recipe_thumb;
+		    	// let imgpath;
+		    	// console.log('IMG', img, 'post', post)
+		    	// if(img){
+		    	// 	imgpath = '/' + img.split('/').slice(2).join('/')
+		    	// }
+		    	// console.log('imgpath', imgpath)
+		      return (
+
+					
+						<ListItem
+							key={post._id}
+							innerDivStyle={{paddingLeft: 85}}
+							primaryText={<Link to={`/view/${post._id}`}>{post.recipe_title}</Link>}
+							secondaryText={`Posted ${new Date(post.timestamp).toLocaleDateString()}`}
+							leftIcon={
+								<Link key={post._id} to={`/view/${post._id}`} className='postlist__thumbnailcontainer'>
+									<img className='postlist__thumbnail' src={post.recipe_thumb} alt={post.recipe_title}/>
+								</Link>
+							}
+							
+							
+						>
+							<div className='postlist__btncontainer'>
+								<Link key={post._id} to={`/editrecipe/${post._id}`} >
+									<IconButton tooltip='Edit' touch={true} iconStyle={{color: 'rgb(117,117,117)'}}>
+										<EditorModeEdit/>
+									</IconButton>
+						    </Link>
+						    <IconButton tooltip='Delete' onTouchTap={this.handleDeleteRecipePost.bind(this, post._id)} touch={true} iconStyle={{color: 'rgb(117,117,117)'}}>
+						    	<ActionDelete/>
+						    </IconButton>
+							</div>
+									
+							    
+						</ListItem>
 						
 						
-					>
-						<div className='postlist__btncontainer'>
-							<Link key={post._id} to={`/editrecipe/${post._id}`} >
-								<IconButton tooltip='Edit' touch={true} iconStyle={{color: 'rgb(117,117,117)'}}>
-									<EditorModeEdit/>
-								</IconButton>
-					    </Link>
-					    <IconButton tooltip='Delete' onTouchTap={this.handleDeleteRecipePost.bind(this, post._id)} touch={true} iconStyle={{color: 'rgb(117,117,117)'}}>
-					    	<ActionDelete/>
-					    </IconButton>
-						</div>
-								
-						    
-					</ListItem>
-					
-					
-					
+						
 
-	      	
-	        
-	      )
-	    });
-    }
+		      	
+		        
+		      )
+		    });
+    	}//end lenght =>1 else
+    }//end loaded opost sucessfully else
 
    
   }//end renderMyRecipePosts func

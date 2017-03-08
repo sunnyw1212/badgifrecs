@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
+import {browserHistory} from 'react-router';
+
 //import { browserHistory } from 'react-router';
 
 import { editRecipePost, getRecipePosts } from '../actions/';
@@ -46,6 +48,11 @@ class EditRecipe extends Component{
 
 	componentWillReceiveProps(nextProps){
 		if(!nextProps.originalSingle.loading && nextProps.originalSingle.post){
+			//reidrect if user doesnt match
+			if(!nextProps.currentUser.user || this.props.currentUser.user.name !== nextProps.currentUser.user.name){
+				console.log('YOU THINK YOURE SMARTER THAN ME HUH? YOUVE ACTIVATED MY REDIRECT TRAP CARD')
+				browserHistory.push('/');
+			}
 			console.log('seting next props state', nextProps)
 			let newState = Object.assign({}, this.state);
 			newState['recipe_gif'] = nextProps.originalSingle.post.recipe_gif;
