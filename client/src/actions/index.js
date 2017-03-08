@@ -67,7 +67,7 @@ let ROOT_URL = 'http://localhost:3000';
 if (window.location.hostname === 'badgifrecipes.herokuapp.com') {
   ROOT_URL = 'https://badgifrecipes.herokuapp.com';
 }
-if (window.location.hostname === 'badgifrecipes.club') {
+if (window.location.hostname === 'www.badgifrecipes.club') {
   ROOT_URL = 'https://badgifrecipes.club';
 }
 
