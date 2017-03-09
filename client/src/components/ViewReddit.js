@@ -217,11 +217,6 @@ class ViewReddit extends Component{
 			'hidden': this.state.imgLoaded
 		});
 
-		let loadingTextClass = classnames({
-			'--unavailable': true,
-			'hidden': this.state.imgLoaded
-		})
-
     //if error
 		if(this.props.redditSingle.error){
 			console.log('errors!', this.props.redditSingle)
@@ -267,7 +262,7 @@ class ViewReddit extends Component{
 								<Sticky>
 									<Card>
 										<CardMedia className='cardmedia__imgcontainer'>
-											<span className={loadingTextClass}>Loading...</span>
+										
 											<div id='backup' className={backupClass}>
 												<ActionLaunch className='backup__icon' onClick={()=>{window.location.href = backupLinkUrl}}></ActionLaunch>
 												
