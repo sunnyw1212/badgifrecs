@@ -24,8 +24,6 @@ import ImageCollections from 'material-ui/svg-icons/image/collections';
 
 import NavigationArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 
-import Headroom from 'react-headroom';
-
 import '../styles/Nav.scss';
 
 
@@ -207,7 +205,7 @@ class Nav extends Component{
 
 	render(){
 		return(
-			<div>
+			<div className='nav__navcontainer'>
 				
 				<AppBar
 					title={<span className='appbar__logo'>BadGifRecipes</span>}
@@ -216,9 +214,9 @@ class Nav extends Component{
 					children={ this.props.currentUser.user ? <p className='appbar__loggedinp'>Logged in as {this.props.currentUser.user.name}</p> : null}
 					className='hidden-xs'
 				/>
-				<Headroom>
-					{this.renderToolbar()}
-				</Headroom>
+				
+				{this.renderToolbar()}
+				
 
 				{this.renderDrawer()}
 			</div>
