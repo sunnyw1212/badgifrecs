@@ -51,6 +51,10 @@ class View extends Component{
 			let recipePostId = currentUrl.split('/').pop(); 
 			this.props.actions.getRecipePosts(recipePostId);
 			this.props.actions.getRecipePosts();
+
+			let newState = Object.assign({}, this.state );
+			newState['imgLoaded'] = false; 
+			this.setState(newState);
 			
 		}
 		
@@ -372,7 +376,7 @@ class View extends Component{
 	render(){
 		let gifImgClass = classnames({
 			'--height100': true,
-			'hidden': !this.state.imgLoaded
+			'--opacity70': !this.state.imgLoaded
 		});
 		
 		//if error

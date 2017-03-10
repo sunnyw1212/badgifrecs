@@ -52,6 +52,10 @@ class ViewReddit extends Component{
 			let recipePostId = currentUrl.split('/').pop(); 
 			this.props.actions.getRedditPost(recipePostId);
 			this.props.actions.getRedditPosts();
+
+			let newState = Object.assign({}, this.state );
+			newState['imgLoaded'] = false; 
+			this.setState(newState);
 			
 		}
 		
@@ -210,7 +214,7 @@ class ViewReddit extends Component{
 	render(){
 		let gifImgClass = classnames({
 			'--height100': true,
-			'hidden': !this.state.imgLoaded
+			'--opacity70': !this.state.imgLoaded
 		});
 
 		let backupClass = classnames({
