@@ -1,9 +1,9 @@
 {
-  "short_name": "BadGifRecipes",
-  "name": "BadGifRecipes",
+  "short_name": "BadGifRecs",
+  "name": "BadGifRecs",
   "icons": [
     {
-      "src":"http://res.cloudinary.com/qwertwerty21/image/upload/v1489096254/fireworks-icon192x192_ntpobp.png",
+      "src":"http://res.cloudinary.com/qwertwerty21/image/upload/v1489174450/favicon192_xcyk5r.png",
       "sizes": "192x192",
       "type": "image/png"
     }
