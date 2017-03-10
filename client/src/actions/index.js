@@ -62,14 +62,17 @@ export const LOGIN_USER_FAIL = 'LOGIN_USER_FAIL';
 export const LOGOUT = 'LOGOUT';
 
 //API config
-
+//default root
 let ROOT_URL = 'http://localhost:3000';
+//if heroku use heroku
 if (window.location.hostname === 'badgifrecipes.herokuapp.com') {
   ROOT_URL = 'https://badgifrecipes.herokuapp.com';
 }
+//if custom domain use custom domain
 if (window.location.hostname === 'www.badgifrecipes.club') {
   ROOT_URL = 'http://www.badgifrecipes.club';
 }
+//if firebase use heroku because firebase doesnt serve your backend correctly
 if (window.location.hostname === 'badgifrecipes.firebaseapp.com') {
   ROOT_URL = 'https://badgifrecipes.herokuapp.com';
 }

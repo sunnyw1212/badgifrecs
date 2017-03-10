@@ -1,6 +1,6 @@
 {
   "short_name": "BadGifRecs",
-  "name": "BadGifRecs",
+  "name": "BadGifRecipes",
   "icons": [
     {
       "src":"http://res.cloudinary.com/qwertwerty21/image/upload/v1489174450/favicon192_xcyk5r.png",
@@ -9,7 +9,8 @@
     }
   ],
   "start_url": "/",
-  "background_color": "#000",
-  "Theme_color": "#536878",
+  "background_color": "#FF4081",
+  "theme_color": "#FF4081",
+  "orientation": "portrait",
   "display": "standalone"
 }
