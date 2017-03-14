@@ -158,6 +158,7 @@ class ViewReddit extends Component{
 					<ListItem
 						secondaryText={`u/${comment.data.author}`}
 						primaryText={comment.data.body}
+            className='commentlist__comment'
 					>	
 						
 					</ListItem>
@@ -280,6 +281,7 @@ class ViewReddit extends Component{
 								<CardHeader 
 						    	title={title}
 						    	subtitle={`Posted By u/${author}`}
+                  className='cardheader__container'
 									children={this.renderNextRecipeBtn()}
 						    >
 						    

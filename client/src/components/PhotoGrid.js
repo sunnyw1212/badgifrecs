@@ -161,7 +161,7 @@ class PhotoGrid extends Component{
 			console.log('posts', posts)
 
 			let gifs = posts.filter((post, index, array )=>{
-				if(post.data.preview && post.data.preview.images[0] && post.data.preview.images[0].variants && post.data.preview.images[0].variants.gif && post.data.preview.images[0].variants.gif.source){
+				if(post.data.preview && post.data.preview.images[0] && post.data.preview.images[0].variants && post.data.preview.images[0].variants.gif && post.data.permalink !== '/r/ShittyGifRecipes/comments/5z096w/meta_rgifrecipes_has_two_mobile_apps_its_about/' ){
 					return post
 				}
 				return null;

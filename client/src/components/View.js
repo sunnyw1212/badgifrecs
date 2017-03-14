@@ -282,6 +282,7 @@ class View extends Component{
 					
 					<div key={index}>
 						<ListItem
+              className='commentlist__comment'
 							primaryText={comment.text_body}
 							secondaryTextLines={2}
 							secondaryText={
@@ -318,6 +319,7 @@ class View extends Component{
 				
 				<div key={index}>
 					<ListItem
+            className='commentlist__comment'
 						primaryText={comment.text_body}
 						secondaryTextLines={2}
 						secondaryText={
@@ -417,10 +419,10 @@ class View extends Component{
 			console.log('this the new props in View', this.props)
 			return(
 				
-				<div className='row'>
+				<div className='row post__container' style={{height: '100%'}}>
 					<StickyContainer>
-						<div className='col-sm-6 col-sm-offset-1 --padlr0'>
-							<Card>
+						<div className='col-sm-6 col-sm-offset-1 --padlr0' style={{height: '100%'}}>
+							<Card style={{height: '100%'}}>
 								<Sticky>
 									<Card>
 										<CardMedia className='cardmedia__imgcontainer'>
@@ -433,6 +435,7 @@ class View extends Component{
 								<CardHeader 
 						    	title={recipe_title}
 						    	subtitle={`Posted By ${name}`}
+                  className='cardheader__container'
 						    	children={this.renderNextRecipeBtn()}
 						    >
 						    
@@ -483,7 +486,7 @@ class View extends Component{
 										</CardTitle>
 										
 										<CardText
-										
+                     
 										>
 											<List>
 												{this.renderNewComments()}
@@ -491,7 +494,7 @@ class View extends Component{
 											</List>
 
 											
-											<Paper>
+											<Paper className='commentform__container'>
 												<form onSubmit={this.handleSubmit} className='--pad15'>
 													<TextField
 														errorText={this.state.err_text_body}
@@ -516,7 +519,7 @@ class View extends Component{
 					</StickyContainer>
 					
 					
-				</div>
+				</div>//end row
 
 
 

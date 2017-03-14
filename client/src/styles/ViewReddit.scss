@@ -67,10 +67,18 @@ $white: rgb(255, 255, 255);
 	top: 10px;
 }
 
+.cardheader__container > div{
+	max-width: 90% !important;
+	line-height: 1.15;
+
+	span{
+		padding-bottom: 5px;
+	}
+}
+
 .cardmedia__imgcontainer > div{
 	height: 50vh !important;
 	width: 100% !important;
-	
 	background-image: url('http://res.cloudinary.com/qwertwerty21/image/upload/v1488992988/food_c2sqh2.png');
 	background-color: $pinkA100;
 	@include animation( "sidescroll 60s linear infinite" );
@@ -132,6 +140,7 @@ $white: rgb(255, 255, 255);
 .viewtext__container{
 	max-height: 70vh;
 	overflow: auto;
+	
 }
 
 @media(max-width: 767px){
@@ -140,3 +149,9 @@ $white: rgb(255, 255, 255);
 		overflow: auto;
 	}
 }
+
+.commentlist__comment{
+	line-height: 1.2 !important;
+}
+
+
