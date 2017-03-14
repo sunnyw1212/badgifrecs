@@ -1,3 +1,6 @@
+//require new relic for monitoring and pinging to prevent downtime must be first line
+require('newrelic');
+
 const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv').config();
@@ -15,9 +18,6 @@ require('dotenv').config();
 const mongoURL = process.env.MONGO_URL;
 
 require('./config/cloudinary');
-
-//require new relic for monitoring and pinging to prevent downtime
-require('newrelic');
 
 //require routes
 const routes = require('./routes/');
