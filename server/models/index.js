@@ -1,7 +1,6 @@
-
 const RecipePostModel = require('./RecipePostModel');
-const CommentModel = require('./CommentModel'); 
-const UserModel = require('./UserModel'); 
+const CommentModel = require('./CommentModel');
+const UserModel = require('./UserModel');
 
 
 module.exports = {

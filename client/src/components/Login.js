@@ -6,34 +6,40 @@ import {loginUser} from '../actions/';
 
 import LinearProgress from 'material-ui/LinearProgress';
 import Dialog from 'material-ui/Dialog';
-import { Card, CardHeader, CardText } from 'material-ui/Card';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import '../styles/RegisterLogin.scss';
 
+class Login extends Component {
 
-class Login extends Component{
+  constructor(props) {
+    super(props)
 
-	constructor(props){
-		super(props)
+    this.state = {
+      name: '',
+      password: '',
+      err_name: null,
+      err_password: null
+    }
 
-		this.state = {
-			name: '',
-			password: '',
-			err_name: null,
-			err_password: null
-		}
+    this.handleSubmit = this
+      .handleSubmit
+      .bind(this);
+  }
 
-		this.handleSubmit = this.handleSubmit.bind(this);
-	}
-
-	dialogActions = [
-		<RaisedButton
-        label='Try Again'
-        primary={true}
-        onTouchTap={ ()=> {window.location.reload()} } //refresh page
-     />
+  dialogActions = [ < RaisedButton label = 'Try Again' primary = {
+      true
+    }
+    onTouchTap = {
+      () => {
+        window
+          .location
+          .reload()
+      }
+    } //refresh page
+    />
 	];
 
 	handleTextChange = (inputElement, e)=>{
@@ -109,76 +115,68 @@ class Login extends Component{
 					actions={this.dialogActions}
 				>
 					{this.props.currentUser.error}
-				</Dialog>
-			)
-		}
+				</Dialog >)
+  } else if (this.props.currentUser.loading) {
 
-		else if(this.props.currentUser.loading){
+    console.log('this.props.currentUser.loading', this.props.currentUser)
+    return (
+      <div className="spinner-holder">
+        <LinearProgress mode='indeterminate'/>
+        <h2>Logging in...</h2>
+      </div>
+    )
+  } else {
+    return (
 
-			console.log('this.props.currentUser.loading', this.props.currentUser)
-			return(
-				<div className="spinner-holder">
-        	<LinearProgress mode='indeterminate' />
-        	<h2>Logging in...</h2>
-      	</div>
-			)
-		}
+      <form onSubmit={this.handleSubmit}>
+        <div className='row'>
+          <div className='col-sm-6 col-sm-offset-3 --padlr0'>
+            <Card>
+              <CardHeader title='Login'></CardHeader>
+              <CardText>
+                <TextField
+                  errorText={this.state.err_name}
+                  floatingLabelText='Username'
+                  value={this.state.name}
+                  onChange={this
+                  .handleTextChange
+                  .bind(this, 'name')}
+                  fullWidth={true}></TextField>
+                <br/>
+                <TextField
+                  errorText={this.state.err_password}
+                  floatingLabelText='Password'
+                  value={this.state.password}
+                  type='password'
+                  onChange={this
+                  .handleTextChange
+                  .bind(this, 'password')}
+                  fullWidth={true}></TextField>
 
-		else{
-			return(
+              </CardText>
+              <RaisedButton primary={true} label='Login' type='submit' className='--width100'></RaisedButton>
+            </Card>
+          </div>
+        </div>
 
-				<form onSubmit={this.handleSubmit}>
-					<div className='row'>
-						<div className='col-sm-6 col-sm-offset-3 --padlr0' >
-							<Card>
-								<CardHeader
-									title='Login'
-								>
-								</CardHeader>
-								<CardText>
-									<TextField
-										errorText={this.state.err_name} 
-										floatingLabelText='Username'
-										value={this.state.name}
-										onChange={this.handleTextChange.bind(this, 'name')}
-										fullWidth={true}
-									>
-									</TextField>
-									<br/>
-									<TextField
-										errorText={this.state.err_password}
-										floatingLabelText='Password'
-										value={this.state.password}
-										type='password'
-										onChange={this.handleTextChange.bind(this, 'password')}
-										fullWidth={true}
-									>
-									</TextField>
+      </form>
+    )
 
-								</CardText>
-								<RaisedButton primary={true} label='Login' type='submit' className='--width100'></RaisedButton>
-							</Card>
-						</div>
-					</div>
-					
-				</form>			
-			)
-		
-		}//end else
+  } //end else
 
-	}//end render
+} //end render
 }
 
-function mapStateToProps(state){
-	return {currentUser: state.users.currentUser}
+function mapStateToProps(state) {
+return {currentUser: state.users.currentUser}
 }
 
-function mapDispatchToProps(dispatch){
-	return {
-		actions:{
-			loginUser: bindActionCreators(loginUser, dispatch)
-		}
-	}
+function mapDispatchToProps(dispatch) {
+return {
+  actions: {
+    loginUser: bindActionCreators(loginUser, dispatch)
+  }
+}
 }
 
-export default connect( mapStateToProps, mapDispatchToProps )( Login );
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -6,32 +6,28 @@ import {logout} from '../actions/';
 
 import {browserHistory} from 'react-router';
 
-
-
-
 class Logout extends Component {
 
-	componentWillMount(){
-		this.props.actions.logout();
-		browserHistory.push('/');
-	}
-
+  componentWillMount() {
+    this
+      .props
+      .actions
+      .logout();
+    browserHistory.push('/');
+  }
 
   render() {
     return null;
-  }//end render
+  } //end render
 
+} //end class Logout
 
-
-
-}//end class Logout
-
-function mapDispatchToProps(dispatch){
-	return {
-		actions:{
-			logout: bindActionCreators(logout, dispatch)
-		} 
-	}
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      logout: bindActionCreators(logout, dispatch)
+    }
+  }
 }
 
 export default connect(null, mapDispatchToProps)(Logout)

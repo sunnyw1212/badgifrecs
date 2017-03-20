@@ -1,5 +1,4 @@
-
-const RecipePostController = require('./RecipePostController'); 
+const RecipePostController = require('./RecipePostController');
 const CommentController = require('./CommentController');
 const UserController = require('./UserController');
 

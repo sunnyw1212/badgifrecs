@@ -12,7 +12,7 @@ import LinearProgress from 'material-ui/LinearProgress';
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import { Card, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import {Card, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 import {List, ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
@@ -23,127 +23,156 @@ import {StickyContainer, Sticky} from 'react-sticky';
 
 import '../styles/ViewReddit.scss';
 
-class ViewReddit extends Component{
+class ViewReddit extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      open: false,
+      imgLoaded: false
+    };
+    this.handleNextRecipe = this
+      .handleNextRecipe
+      .bind(this);
 
-	constructor(props){
-		super(props)
-		this.state = {
-			open: false,
-			imgLoaded: false
-		};
-		this.handleNextRecipe = this.handleNextRecipe.bind(this);
-		
-	}
+  }
 
-	componentWillMount(){
-		console.log('Thisis the props in view reddit ', this.props.redditSingle)
-		
-		let currentUrl = window.location.href
-		let redditPostId = currentUrl.split('/').pop(); 
-		this.props.actions.getRedditPost(redditPostId)
-		this.props.actions.getRedditPosts();
-	}
+  componentWillMount() {
+    console.log('Thisis the props in view reddit ', this.props.redditSingle)
 
-	componentWillReceiveProps(nextProps){
-		if(this.props.location.pathname !== nextProps.location.pathname){
-			console.log(this.props.location.pathname, ' and next is', nextProps.location.pathname)
-			let currentUrl = window.location.href
-			let recipePostId = currentUrl.split('/').pop(); 
-			this.props.actions.getRedditPost(recipePostId);
-			this.props.actions.getRedditPosts();
+    let currentUrl = window.location.href
+    let redditPostId = currentUrl
+      .split('/')
+      .pop();
+    this
+      .props
+      .actions
+      .getRedditPost(redditPostId)
+    this
+      .props
+      .actions
+      .getRedditPosts();
+  }
 
-			let newState = Object.assign({}, this.state );
-			newState['imgLoaded'] = false; 
-			this.setState(newState);
-			
-		}
-		
-	}
+  componentWillReceiveProps(nextProps) {
+    if (this.props.location.pathname !== nextProps.location.pathname) {
+      console.log(this.props.location.pathname, ' and next is', nextProps.location.pathname)
+      let currentUrl = window.location.href
+      let recipePostId = currentUrl
+        .split('/')
+        .pop();
+      this
+        .props
+        .actions
+        .getRedditPost(recipePostId);
+      this
+        .props
+        .actions
+        .getRedditPosts();
 
-	handleToggle = () => {
-		let newState = Object.assign({}, this.state );
-		newState['open'] = !this.state.open; 
-		this.setState(newState);
-	};
+      let newState = Object.assign({}, this.state);
+      newState['imgLoaded'] = false;
+      this.setState(newState);
 
-	handleImgLoaded = () => {
-		let newState = Object.assign({}, this.state );
-		newState['imgLoaded'] = true; 
-		this.setState(newState);
-	}
+    }
 
-	handleImgLoadFailed = (backupLinkUrl, thumbnail, title)=>{
-		
-		let a = document.createElement('a');
-		a.setAttribute('href', backupLinkUrl);
-		
-		let img = document.createElement('img')
-		img.setAttribute('src', thumbnail)
-		img.setAttribute('alt', title)
-		img.className = 'cardmedia__backupimg'
-		
-		a.append(img)
+  }
 
-		document.getElementById('backup').append(a)
+  handleToggle = () => {
+    let newState = Object.assign({}, this.state);
+    newState['open'] = !this.state.open;
+    this.setState(newState);
+  };
 
-		// let iframe = document.createElement('iframe');
-		// iframe.setAttribute('src', backupLinkUrl)
-		// iframe.className = 'cardmedia__backupimg'
-		// document.getElementById('backup').append(iframe)
-		
-		let newState = Object.assign({}, this.state );
-		newState['imgLoaded'] = false; 
-		this.setState(newState);		
-		
-	}
+  handleImgLoaded = () => {
+    let newState = Object.assign({}, this.state);
+    newState['imgLoaded'] = true;
+    this.setState(newState);
+  }
 
-	handleNextRecipe = () =>{
-		let {posts} = this.props.redditAll;
-		let currentUrl = window.location.href
-		let redditPostId = currentUrl.split('/').pop(); 
-		
-		//only return posts with actual gif sources
-		let gifs = posts.filter((post, index, array )=>{
-			if(post.data.preview && post.data.preview.images[0] && post.data.preview.images[0].variants && post.data.preview.images[0].variants.gif && post.data.preview.images[0].variants.gif.source){
-				return post
-			}
-			return null;
-		});
-		console.log('GIFS', gifs)
-		//get current post's index in gifs array
-		var currentGifIndex = gifs.map((gif)=>{
-			return gif.data.id
-		}).indexOf(redditPostId);
-		
+  handleImgLoadFailed = (backupLinkUrl, thumbnail, title) => {
 
-		//get next recipe id 
-		let nextRecipeId = gifs[currentGifIndex + 1] ? gifs[currentGifIndex + 1].data.id : gifs[0].data.id
+    let a = document.createElement('a');
+    a.setAttribute('href', backupLinkUrl);
 
-		
-		console.log('heres the next page', nextRecipeId)
+    let img = document.createElement('img')
+    img.setAttribute('src', thumbnail)
+    img.setAttribute('alt', title)
+    img.className = 'cardmedia__backupimg'
 
+    a.append(img)
 
-		browserHistory.push(`/viewreddit/${nextRecipeId}`);
-		
-		this.props.actions.getRedditPost(nextRecipeId)
-		this.props.actions.getRedditPosts();
-		// window.location.href = 'localhost:3001' + nextRecipeId;
-		// window.location.reload()
+    document
+      .getElementById('backup')
+      .append(a)
+	
+    // let iframe = document.createElement('iframe'); iframe.setAttribute('src',
+    // backupLinkUrl) iframe.className = 'cardmedia__backupimg'
+    // document.getElementById('backup').append(iframe)
 
-	};
+    let newState = Object.assign({}, this.state);
+    newState['imgLoaded'] = false;
+    this.setState(newState);
 
-	dialogActions = [
-    <RaisedButton
-			label='Cancel'
-			primary={false}
-			onTouchTap={this.handleToggle}
-    />,
-		<RaisedButton
-        label='Try Again'
-        primary={true}
-        onTouchTap={ ()=> {window.location.reload()} } //refresh page
-     />
+  }
+
+  handleNextRecipe = () => {
+    let {posts} = this.props.redditAll;
+    let currentUrl = window.location.href
+    let redditPostId = currentUrl
+      .split('/')
+      .pop();
+
+    //only return posts with actual gif sources
+    let gifs = posts.filter((post, index, array) => {
+      if (post.data.preview && post.data.preview.images[0] && post.data.preview.images[0].variants && post.data.preview.images[0].variants.gif && post.data.preview.images[0].variants.gif.source) {
+        return post
+      }
+      return null;
+    });
+    console.log('GIFS', gifs)
+    //get current post's index in gifs array
+    var currentGifIndex = gifs.map((gif) => {
+      return gif.data.id
+    }).indexOf(redditPostId);
+
+    //get next recipe id
+    let nextRecipeId = gifs[currentGifIndex + 1]
+      ? gifs[currentGifIndex + 1].data.id
+      : gifs[0].data.id
+
+    console.log('heres the next page', nextRecipeId)
+
+    browserHistory.push(`/viewreddit/${nextRecipeId}`);
+
+    this
+      .props
+      .actions
+      .getRedditPost(nextRecipeId)
+    this
+      .props
+      .actions
+      .getRedditPosts();
+    
+
+  };
+
+  dialogActions = [ < RaisedButton label = 'Cancel' primary = {
+      false
+    }
+    onTouchTap = {
+      this.handleToggle
+    } />, < RaisedButton label = 'Try Again' primary = {
+      true
+    }
+    onTouchTap = {
+      () => {
+        window
+          .location
+          .reload()
+      }
+    } //refresh page
+    />
 	];
 
 	
@@ -156,7 +185,7 @@ class ViewReddit extends Component{
 				
 				<div key={index}>
 					<ListItem
-						secondaryText={`u/${comment.data.author}`}
+						secondaryText={`u/$ {comment.data.author}`}
 						primaryText={comment.data.body}
             className='commentlist__comment'
 					>	
@@ -176,30 +205,7 @@ class ViewReddit extends Component{
 		}
 
 		else{
-			// let {posts} = this.props.redditAll;
-			// let currentUrl = window.location.href
-			// let redditPostId = currentUrl.split('/').pop(); 
 			
-			// //only return posts with actual gif sources
-			// let gifs = posts.filter((post, index, array )=>{
-			// 	if(post.data.preview && post.data.preview.images[0] && post.data.preview.images[0].variants && post.data.preview.images[0].variants.gif && post.data.preview.images[0].variants.gif.source){
-			// 		return post
-			// 	}
-			// 	return null;
-			// });
-			// console.log('GIFS', gifs)
-			// //get current post's index in gifs array
-			// var currentGifIndex = gifs.map((gif)=>{
-			// 	return gif.data.id
-			// }).indexOf(redditPostId);
-			
-			
-			// //get next recipe id 
-			// let nextRecipe = gifs[currentGifIndex + 1] ? gifs[currentGifIndex + 1].data : gifs[0].data
-
-			// //preload next recipe img gif
-			// let preloadImg = new Image();
-			// preloadImg.src = nextRecipe.preview.images[0].variants.gif.source.url;
 			return(
 				<RaisedButton
 					label='Next Recipe'
@@ -214,8 +220,7 @@ class ViewReddit extends Component{
 
 	render(){
 		let gifImgClass = classnames({
-			'--height100': true,
-			'--opacity70': !this.state.imgLoaded
+			'--height100': true
 		});
 
 		let backupClass = classnames({
@@ -280,7 +285,7 @@ class ViewReddit extends Component{
 							<Card>
 								<CardHeader 
 						    	title={title}
-						    	subtitle={`Posted By u/${author}`}
+						    	subtitle={` Posted By u / $ {author}`}
                   className='cardheader__container'
 									children={this.renderNextRecipeBtn()}
 						    >
