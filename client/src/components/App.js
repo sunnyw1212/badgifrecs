@@ -1,20 +1,15 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import '../styles/App.scss';
 import Nav from './Nav';
 
 class App extends Component {
-
   render() {
     return (
-      <div className='app-container'>
+      <div className="app-container">
+        <Nav />
 
-        <Nav/>
-
-        <div className='content-container container'>
-          {this.props.children}
-        </div>
-
+        <div className="content-container container">{this.props.children}</div>
       </div>
     );
   }
