@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "node ./bin/www",
-    "devinst": "cd .. && cd client && npm install && npm run build && cd .."
+    "devinst": "cd .. && cd client && npm install && npm run build && cd ..",
+    "copyclient2server": "cd .. && cd client/build && cp -a . ../../server/public"
   },
   "dependencies": {
     "async": "^2.1.4",
