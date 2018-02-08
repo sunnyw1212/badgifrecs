@@ -239,7 +239,7 @@ class ViewReddit extends Component {
         thumbnail
       } = this.props.redditSingle.post[0].data.children[0].data;
 
-      console.log('this the new props in viewReddit FUCK YOU', this.props);
+      console.log('this the new props in viewReddit ', this.props);
       return (
         <div className="row">
           <StickyContainer>
