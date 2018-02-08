@@ -1,3 +1,4 @@
+const sslRedirect = require('heroku-ssl-redirect');
 const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv').config();
@@ -22,7 +23,8 @@ const routes = require('./routes/');
 // require('./routes/recipepost'); const user = require('./routes/user'); init
 // express instance
 let app = express();
-
+//redirect http requests to https
+app.use(sslRedirect);
 //use gzip compression
 const compression = require('compression');
 app.use(compression());

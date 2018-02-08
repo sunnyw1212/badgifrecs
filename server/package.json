@@ -27,6 +27,7 @@
     "express-session": "^1.15.0",
     "gm": "^1.23.0",
     "google-images": "^2.0.0",
+    "heroku-ssl-redirect": "0.0.4",
     "jade": "~1.11.0",
     "mongodb": "^2.2.20",
     "mongoose": "^4.7.6",
