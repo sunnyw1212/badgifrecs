@@ -24,7 +24,7 @@ const routes = require('./routes/');
 // express instance
 let app = express();
 //redirect http requests to https
-app.use(sslRedirect);
+app.use(sslRedirect());
 //use gzip compression
 const compression = require('compression');
 app.use(compression());
