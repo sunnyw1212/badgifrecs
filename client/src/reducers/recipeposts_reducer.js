@@ -23,7 +23,7 @@ import {
   DELETE_RECIPEPOST_LOAD,
   DELETE_RECIPEPOST_SUCCESS,
   DELETE_RECIPEPOST_FAIL
-} from '../actions/index';
+} from '../constants/';
 
 const INITIAL_STATE = {
   originalAll: {
@@ -58,12 +58,11 @@ const INITIAL_STATE = {
   }
 };
 
-export default function (state = INITIAL_STATE, action) {
-  console.log('got an action', action)
+export default function(state = INITIAL_STATE, action) {
+  console.log('got an action', action);
 
   let error;
   switch (action.type) {
-
     case GET_RECIPEPOSTS_LOAD:
       console.log('getRecipePostsLoad');
       return Object.assign({}, state, {
@@ -123,7 +122,7 @@ export default function (state = INITIAL_STATE, action) {
       });
 
     case GET_MYRECIPEPOSTS_LOAD:
-      console.log('getMyrecipePostsload')
+      console.log('getMyrecipePostsload');
       return Object.assign({}, state, {
         originalMyRecipePosts: {
           posts: [],
@@ -133,7 +132,7 @@ export default function (state = INITIAL_STATE, action) {
       });
 
     case GET_MYRECIPEPOSTS_SUCCESS:
-      console.log('getMyRecipePostsSuccess', action)
+      console.log('getMyRecipePostsSuccess', action);
       return Object.assign({}, state, {
         originalMyRecipePosts: {
           posts: action.payload.data,
@@ -143,8 +142,8 @@ export default function (state = INITIAL_STATE, action) {
       });
 
     case GET_MYRECIPEPOSTS_FAIL:
-      error = action.payload
-      console.log('getMyRecipePostsFail', error)
+      error = action.payload;
+      console.log('getMyRecipePostsFail', error);
       return Object.assign({}, state, {
         originalMyRecipePosts: {
           posts: [],
@@ -214,7 +213,7 @@ export default function (state = INITIAL_STATE, action) {
       });
 
     case CREATE_RECIPEPOST_LOAD:
-      console.log('createRecipePostLoad')
+      console.log('createRecipePostLoad');
       return Object.assign({}, state, {
         new: {
           post: null,
@@ -235,7 +234,7 @@ export default function (state = INITIAL_STATE, action) {
       });
 
     case CREATE_RECIPEPOST_FAIL:
-      console.log('failed createRecipePost ', action.payload)
+      console.log('failed createRecipePost ', action.payload);
       error = action.payload;
 
       return Object.assign({}, state, {
@@ -269,7 +268,7 @@ export default function (state = INITIAL_STATE, action) {
       });
 
     case EDIT_RECIPEPOST_FAIL:
-      console.log('editRecipePOstFAIL', action.payload)
+      console.log('editRecipePOstFAIL', action.payload);
       error = action.payload;
       return Object.assign({}, state, {
         originalSingle: {
@@ -292,12 +291,12 @@ export default function (state = INITIAL_STATE, action) {
       });
 
     case DELETE_RECIPEPOST_SUCCESS: //remove post from state
-      console.log('delete recipepost action payload', action.payload)
+      console.log('delete recipepost action payload', action.payload);
       return Object.assign({}, state, {
         originalMyRecipePosts: {
-          posts: [...state.originalMyRecipePosts.posts].filter((curPost) => {
-            console.log('heres curPost', curPost._id)
-            return curPost._id !== action.payload.data._id
+          posts: [...state.originalMyRecipePosts.posts].filter(curPost => {
+            console.log('heres curPost', curPost._id);
+            return curPost._id !== action.payload.data._id;
           }), //WHAT DO I PUT HERE
           error: null,
           loading: false

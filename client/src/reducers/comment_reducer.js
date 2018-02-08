@@ -1,4 +1,9 @@
-import {CREATE_COMMENT_LOAD, CREATE_COMMENT_SUCCESS, CREATE_COMMENT_FAIL, RESET_NEW_COMMENTS} from '../actions/index';
+import {
+  CREATE_COMMENT_LOAD,
+  CREATE_COMMENT_SUCCESS,
+  CREATE_COMMENT_FAIL,
+  RESET_NEW_COMMENTS
+} from '../constants/';
 
 const INITIAL_STATE = {
   newComments: {
@@ -8,14 +13,13 @@ const INITIAL_STATE = {
   }
 };
 
-export default function (state = INITIAL_STATE, action) {
-  console.log('HERES THE INITIAL_STATE IN COMMENT REDUCER', INITIAL_STATE)
-  console.log('got a comment  action', action)
+export default function(state = INITIAL_STATE, action) {
+  console.log('HERES THE INITIAL_STATE IN COMMENT REDUCER', INITIAL_STATE);
+  console.log('got a comment  action', action);
 
   let error;
 
   switch (action.type) {
-
     case CREATE_COMMENT_LOAD:
       console.log('creaComment LOad');
       return Object.assign({}, state, {
@@ -26,19 +30,16 @@ export default function (state = INITIAL_STATE, action) {
         }
       });
     case CREATE_COMMENT_SUCCESS:
-      console.log('create comment success', action.payload.data)
+      console.log('create comment success', action.payload.data);
       return Object.assign({}, state, {
         newComments: {
-          comments: [
-            ...state.newComments.comments,
-            action.payload.data
-          ],
+          comments: [...state.newComments.comments, action.payload.data],
           error: null,
           loading: false
         }
       });
     case CREATE_COMMENT_FAIL:
-      console.log('CREATE COMENT FAIL ', action.payload)
+      console.log('CREATE COMENT FAIL ', action.payload);
       error = action.payload;
       return Object.assign({}, state, {
         newComments: {
@@ -47,10 +48,10 @@ export default function (state = INITIAL_STATE, action) {
           loading: false
         }
       });
-      // reset newcomments state whenever you chagne View component and the component
-      // unmounts
+    // reset newcomments state whenever you chagne View component and the component
+    // unmounts
     case RESET_NEW_COMMENTS:
-      console.log('resetting newComments from state')
+      console.log('resetting newComments from state');
       return Object.assign({}, state, {
         newComments: {
           comments: [],
@@ -62,5 +63,4 @@ export default function (state = INITIAL_STATE, action) {
     default:
       return state;
   }
-
 } //end export default func

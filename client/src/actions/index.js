@@ -1,66 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-//recipepost constants
-export const GET_RECIPEPOSTS = 'GET_RECIPEPOSTS';
-export const GET_RECIPEPOSTS_LOAD = 'GET_RECIPEPOSTS_LOAD';
-export const GET_RECIPEPOSTS_SUCCESS = 'GET_RECIPEPOSTS_SUCCESS';
-export const GET_RECIPEPOSTS_FAIL = 'GET_RECIPEPOSTS_FAIL';
-
-export const GET_RECIPEPOST_LOAD = 'GET_RECIPEPOST_LOAD';
-export const GET_RECIPEPOST_SUCCESS = 'GET_RECIPEPOST_SUCCESS';
-export const GET_RECIPEPOST_FAIL = 'GET_RECIPEPOST_FAIL';
-
-export const GET_MYRECIPEPOSTS_LOAD = 'GET_MYRECIPEPOSTS_LOAD';
-export const GET_MYRECIPEPOSTS_SUCCESS = 'GET_MYRECIPEPOSTS_SUCCESS';
-export const GET_MYRECIPEPOSTS_FAIL = 'GET_MYRECIPEPOSTS_FAIL';
-
-export const CREATE_RECIPEPOST = 'CREATE_RECIPEPOST';
-export const CREATE_RECIPEPOST_LOAD = 'CREATE_RECIPEPOST_LOAD';
-export const CREATE_RECIPEPOST_SUCCESS = 'CREATE_RECIPEPOST_SUCCESS';
-export const CREATE_RECIPEPOST_FAIL = 'CREATE_RECIPEPOST_FAIL';
-
-export const EDIT_RECIPEPOST = 'EDIT_RECIPEPOST';
-export const EDIT_RECIPEPOST_LOAD = 'EDIT_RECIPEPOST_LOAD';
-export const EDIT_RECIPEPOST_SUCCESS = 'EDIT_RECIPEPOST_SUCCESS';
-export const EDIT_RECIPEPOST_FAIL = 'EDIT_RECIPEPOST_FAIL';
-
-export const DELETE_RECIPEPOST = 'DELETE_RECIPEPOST';
-export const DELETE_RECIPEPOST_LOAD = 'DELETE_RECIPEPOST_LOAD';
-export const DELETE_RECIPEPOST_SUCCESS = 'DELETE_RECIPEPOST_SUCCESS';
-export const DELETE_RECIPEPOST_FAIL = 'DELETE_RECIPEPOST_FAIL';
-
-export const GET_REDDITPOSTS = 'GET_REDDITPOSTS';
-export const GET_REDDITPOSTS_LOAD = 'GET_REDDITPOSTS_LOAD';
-export const GET_REDDITPOSTS_SUCCESS = 'GET_REDDITPOSTS_SUCCESS';
-export const GET_REDDITPOSTS_FAIL = 'GET_REDDITPOSTS_FAIL';
-
-export const GET_REDDITPOST = 'GET_REDDITPOST';
-export const GET_REDDITPOST_LOAD = 'GET_REDDITPOST_LOAD';
-export const GET_REDDITPOST_SUCCESS = 'GET_REDDITPOST_SUCCESS';
-export const GET_REDDITPOST_FAIL = 'GET_REDDITPOST_FAIL';
-
-//comment constants
-export const CREATE_COMMENT = 'CREATE_COMMENT';
-export const CREATE_COMMENT_LOAD = 'CREATE_COMMENT_LOAD';
-export const CREATE_COMMENT_SUCCESS = 'CREATE_COMMENT_SUCCESS';
-export const CREATE_COMMENT_FAIL = 'CREATE_COMMENT_FAIL';
-
-//for removing new comments on component unmount
-export const RESET_NEW_COMMENTS = 'RESET_NEW_COMMENTS';
-
-//user constants
-export const REGISTER_USER = 'REGISTER_USER';
-export const REGISTER_USER_LOAD = 'REGISTER_USER_LOAD';
-export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
-export const REGISTER_USER_FAIL = 'REGISTER_USER_FAIL';
-
-export const LOGIN_USER = 'LOGIN_USER';
-export const LOGIN_USER_LOAD = 'LOGIN_USER_LOAD';
-export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
-export const LOGIN_USER_FAIL = 'LOGIN_USER_FAIL';
-
-export const LOGOUT = 'LOGOUT';
-
+import * as Constants from './../constants/index.js';
 //API config default root
 let ROOT_URL = 'http://localhost:3000';
 //if heroku use heroku
@@ -133,39 +73,39 @@ export function getRecipePosts(id = '', name = '') {
 }
 
 function getRecipePostLoad() {
-  return { type: GET_RECIPEPOST_LOAD };
+  return { type: Constants.GET_RECIPEPOST_LOAD };
 }
 
 function getRecipePostSuccess(recipepost) {
-  return { type: GET_RECIPEPOST_SUCCESS, payload: recipepost };
+  return { type: Constants.GET_RECIPEPOST_SUCCESS, payload: recipepost };
 }
 
 function getRecipePostFail(errMessage) {
-  return { type: GET_RECIPEPOST_FAIL, payload: errMessage };
+  return { type: Constants.GET_RECIPEPOST_FAIL, payload: errMessage };
 }
 
 function getMyRecipePostsLoad() {
-  return { type: GET_MYRECIPEPOSTS_LOAD };
+  return { type: Constants.GET_MYRECIPEPOSTS_LOAD };
 }
 
 function getMyRecipePostsSuccess(myrecipeposts) {
-  return { type: GET_MYRECIPEPOSTS_SUCCESS, payload: myrecipeposts };
+  return { type: Constants.GET_MYRECIPEPOSTS_SUCCESS, payload: myrecipeposts };
 }
 
 function getMyRecipePostsFail(errMessage) {
-  return { type: GET_MYRECIPEPOSTS_FAIL, payload: errMessage };
+  return { type: Constants.GET_MYRECIPEPOSTS_FAIL, payload: errMessage };
 }
 
 function getRecipePostsLoad() {
-  return { type: GET_RECIPEPOSTS_LOAD };
+  return { type: Constants.GET_RECIPEPOSTS_LOAD };
 }
 
 function getRecipePostsSuccess(recipeposts) {
-  return { type: GET_RECIPEPOSTS_SUCCESS, payload: recipeposts };
+  return { type: Constants.GET_RECIPEPOSTS_SUCCESS, payload: recipeposts };
 }
 
 function getRecipePostsFail(errMessage) {
-  return { type: GET_RECIPEPOSTS_FAIL, payload: errMessage };
+  return { type: Constants.GET_RECIPEPOSTS_FAIL, payload: errMessage };
 }
 
 const REDDITPOSTS_URL_1 =
@@ -210,15 +150,15 @@ export function getRedditPosts() {
 }
 
 function getRedditPostsLoad() {
-  return { type: GET_REDDITPOSTS_LOAD };
+  return { type: Constants.GET_REDDITPOSTS_LOAD };
 }
 
 function getRedditPostsSuccess(redditposts) {
-  return { type: GET_REDDITPOSTS_SUCCESS, payload: redditposts };
+  return { type: Constants.GET_REDDITPOSTS_SUCCESS, payload: redditposts };
 }
 
 function getRedditPostsFail(errMessage) {
-  return { type: GET_REDDITPOSTS_FAIL, payload: errMessage };
+  return { type: Constants.GET_REDDITPOSTS_FAIL, payload: errMessage };
 }
 
 //GET SINGLE REDDIT POST
@@ -250,15 +190,15 @@ export function getRedditPost(id) {
 }
 
 function getRedditPostLoad() {
-  return { type: GET_REDDITPOST_LOAD };
+  return { type: Constants.GET_REDDITPOST_LOAD };
 }
 
 function getRedditPostSuccess(redditpost) {
-  return { type: GET_REDDITPOST_SUCCESS, payload: redditpost };
+  return { type: Constants.GET_REDDITPOST_SUCCESS, payload: redditpost };
 }
 
 function getRedditPostFail(errMessage) {
-  return { type: GET_REDDITPOST_FAIL, payload: errMessage };
+  return { type: Constants.GET_REDDITPOST_FAIL, payload: errMessage };
 }
 
 //for loading
@@ -287,16 +227,16 @@ export function createRecipePost(data) {
 } //end createRecipePost
 
 function createRecipePostLoad() {
-  return { type: CREATE_RECIPEPOST_LOAD };
+  return { type: Constants.CREATE_RECIPEPOST_LOAD };
 }
 
 //for successful creation of recipepost
 function createRecipePostSuccess(newRecipePost) {
-  return { type: CREATE_RECIPEPOST_SUCCESS, payload: newRecipePost };
+  return { type: Constants.CREATE_RECIPEPOST_SUCCESS, payload: newRecipePost };
 }
 
 function createRecipePostFail(errMessage) {
-  return { type: CREATE_RECIPEPOST_FAIL, payload: errMessage };
+  return { type: Constants.CREATE_RECIPEPOST_FAIL, payload: errMessage };
 }
 
 export function editRecipePost(id = '', data) {
@@ -326,15 +266,15 @@ export function editRecipePost(id = '', data) {
 }
 
 function editRecipePostLoad() {
-  return { type: EDIT_RECIPEPOST_LOAD };
+  return { type: Constants.EDIT_RECIPEPOST_LOAD };
 }
 
 function editRecipePostSuccess(editedRecipePost) {
-  return { type: EDIT_RECIPEPOST_SUCCESS, payload: editedRecipePost };
+  return { type: Constants.EDIT_RECIPEPOST_SUCCESS, payload: editedRecipePost };
 }
 
 function editRecipePostFail(errMessage) {
-  return { type: EDIT_RECIPEPOST_FAIL, payload: errMessage };
+  return { type: Constants.EDIT_RECIPEPOST_FAIL, payload: errMessage };
 }
 
 export function deleteRecipePost(id = '') {
@@ -364,15 +304,15 @@ export function deleteRecipePost(id = '') {
 }
 
 function deleteRecipePostLoad() {
-  return { type: DELETE_RECIPEPOST_LOAD };
+  return { type: Constants.DELETE_RECIPEPOST_LOAD };
 }
 
 function deleteRecipePostSuccess(deletedPost) {
-  return { type: DELETE_RECIPEPOST_SUCCESS, payload: deletedPost };
+  return { type: Constants.DELETE_RECIPEPOST_SUCCESS, payload: deletedPost };
 }
 
 function deleteRecipePostFail(errMessage) {
-  return { type: DELETE_RECIPEPOST_FAIL, payload: errMessage };
+  return { type: Constants.DELETE_RECIPEPOST_FAIL, payload: errMessage };
 }
 
 //create comment actions
@@ -398,19 +338,19 @@ export function createComment(data) {
 } //end createComment func
 
 function createCommentLoad() {
-  return { type: CREATE_COMMENT_LOAD };
+  return { type: Constants.CREATE_COMMENT_LOAD };
 }
 
 function createCommentSuccess(newComment) {
-  return { type: CREATE_COMMENT_SUCCESS, payload: newComment };
+  return { type: Constants.CREATE_COMMENT_SUCCESS, payload: newComment };
 }
 
 function createCommentFail(errMessage) {
-  return { type: CREATE_COMMENT_FAIL, payload: errMessage };
+  return { type: Constants.CREATE_COMMENT_FAIL, payload: errMessage };
 }
 
 export function resetNewComments() {
-  return { type: RESET_NEW_COMMENTS };
+  return { type: Constants.RESET_NEW_COMMENTS };
 }
 
 //register user acitons
@@ -428,8 +368,7 @@ export function registerUser(userData) {
         console.log('error in action registerUser', error);
         dispatch(
           registerUserFail(
-            'There was a problem while Registering your Account. Please choose a different Us' +
-              'ername.'
+            'There was a problem while Registering your Account. Please choose a different Username.'
           )
         );
       }
@@ -438,15 +377,15 @@ export function registerUser(userData) {
 } //end register user
 
 function registerUserLoad() {
-  return { type: REGISTER_USER_LOAD };
+  return { type: Constants.REGISTER_USER_LOAD };
 }
 
 function registerUserSuccess(newUserData) {
-  return { type: REGISTER_USER_SUCCESS, payload: newUserData };
+  return { type: Constants.REGISTER_USER_SUCCESS, payload: newUserData };
 }
 
 function registerUserFail(errMessage) {
-  return { type: REGISTER_USER_FAIL, payload: errMessage };
+  return { type: Constants.REGISTER_USER_FAIL, payload: errMessage };
 }
 
 export function loginUser(userData) {
@@ -474,18 +413,18 @@ export function loginUser(userData) {
 } //end loginuser
 
 function loginUserLoad() {
-  return { type: LOGIN_USER_LOAD };
+  return { type: Constants.LOGIN_USER_LOAD };
 }
 
 function loginUserSuccess(loggedInUserData) {
-  return { type: LOGIN_USER_SUCCESS, payload: loggedInUserData };
+  return { type: Constants.LOGIN_USER_SUCCESS, payload: loggedInUserData };
 }
 
 function loginUserFail(errMessage) {
-  return { type: LOGIN_USER_FAIL, payload: errMessage };
+  return { type: Constants.LOGIN_USER_FAIL, payload: errMessage };
 }
 
 //logout actions
 export function logout() {
-  return { type: LOGOUT };
+  return { type: Constants.LOGOUT };
 }

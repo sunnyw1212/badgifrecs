@@ -6,9 +6,9 @@ import {
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
   LOGOUT
-} from '../actions/index';
+} from '../constants/';
 
-import {loadState} from '../snippets/helpers';
+import { loadState } from '../snippets/helpers';
 
 let persistedState = null;
 
@@ -24,26 +24,27 @@ const INITIAL_STATE = {
   }
 };
 
-export default function (state = INITIAL_STATE, action) {
-  console.log('HERES THE INITIAL_STATE IN USER REDUCER', INITIAL_STATE)
-  console.log('got a user action', action)
+export default function(state = INITIAL_STATE, action) {
+  console.log('HERES THE INITIAL_STATE IN USER REDUCER', INITIAL_STATE);
+  console.log('got a user action', action);
 
   let error;
   switch (action.type) {
-
     case REGISTER_USER_LOAD:
-      console.log('registerUserLoad')
+      console.log('registerUserLoad');
       return Object.assign({}, state, {
         currentUser: {
           user: null,
           error: null,
           loading: true
         }
-
       });
 
     case REGISTER_USER_SUCCESS:
-      console.log('heres the data for REGISTER_USER_SUCCESS', action.payload.data);
+      console.log(
+        'heres the data for REGISTER_USER_SUCCESS',
+        action.payload.data
+      );
       return Object.assign({}, state, {
         currentUser: {
           user: action.payload.data,
@@ -53,7 +54,7 @@ export default function (state = INITIAL_STATE, action) {
       });
 
     case REGISTER_USER_FAIL:
-      console.log('failed register user REGISTERUSERFAAIL ', action.payload)
+      console.log('failed register user REGISTERUSERFAAIL ', action.payload);
       error = action.payload;
       return Object.assign({}, state, {
         currentUser: {
@@ -61,22 +62,20 @@ export default function (state = INITIAL_STATE, action) {
           error: error,
           loading: false
         }
-
       });
 
     case LOGIN_USER_LOAD:
-      console.log('loginUserLoad')
+      console.log('loginUserLoad');
       return Object.assign({}, state, {
         currentUser: {
           user: null,
           error: null,
           loading: true
         }
-
       });
 
     case LOGIN_USER_SUCCESS:
-      console.log('heres the data for LOGIN USER SEUCESS', action.payload.data)
+      console.log('heres the data for LOGIN USER SEUCESS', action.payload.data);
       return Object.assign({}, state, {
         currentUser: {
           user: action.payload.data,
@@ -97,7 +96,7 @@ export default function (state = INITIAL_STATE, action) {
       });
 
     case LOGOUT:
-      console.log('LOGGED OUT IN REDUCER')
+      console.log('LOGGED OUT IN REDUCER');
       return Object.assign({}, state, {
         currentUser: {
           user: null,
@@ -108,6 +107,5 @@ export default function (state = INITIAL_STATE, action) {
 
     default:
       return state;
-
   } //end switch
 } //end export default function
